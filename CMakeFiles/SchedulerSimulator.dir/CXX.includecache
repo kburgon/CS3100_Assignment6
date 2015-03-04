@@ -1,0 +1,14 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/kevin/Documents/CS3100/CS3100_Assignment6/Burst.cpp
+Burst.hpp
+/home/kevin/Documents/CS3100/CS3100_Assignment6/Burst.hpp
+
+/home/kevin/Documents/CS3100/CS3100_Assignment6/Burst.hpp
+
