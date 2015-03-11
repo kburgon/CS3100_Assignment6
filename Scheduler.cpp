@@ -52,11 +52,22 @@ void Scheduler::init()
 	runSession();
 }
 
+void Scheduler::execTask(std::shared_ptr<Task> exTask, double curTime)
+{
+	std::cout << "Executing task...\n";
+	exTask->endBurst(curTime);
+	double nextEventTime = curTime + cntxtSwitchCost + exTask->getBurstTime();
+	Event nextEvent(exTask, nextEventTime);
+	// numCpus--;
+	eQueue.addEvent(nextEvent);
+}
+
 void Scheduler::runSession()
 {
 	std::cout << "Running session...\n";
 	bool endOfSession = false;
 	Event curEvent;
+	std::shared_ptr<Task> curTask;
 	while (!endOfSession && !eQueue.isEmpty())
 	{
 		curEvent = eQueue.pullEvent();
@@ -68,6 +79,15 @@ void Scheduler::runSession()
 		else 
 		{
 			std::cout << "Not ending session yet...\n";
+			curTask = curEvent.getRelatedTask();
+			if (numCpus > 0)
+			{
+				execTask(curTask, curEvent.getTime());
+			}
+			else
+			{
+				rQueue.pushTask(curTask);
+			}
 		}
 	}
 	// std::shared_ptr<Task> curTask;

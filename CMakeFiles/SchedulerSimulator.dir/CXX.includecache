@@ -10,10 +10,6 @@
 iostream
 -
 
-/home/kevin/Documents/CS3100/CS3100_Assignment6/Event.cpp
-Event.hpp
-/home/kevin/Documents/CS3100/CS3100_Assignment6/Event.hpp
-
 /home/kevin/Documents/CS3100/CS3100_Assignment6/Event.hpp
 Task.hpp
 /home/kevin/Documents/CS3100/CS3100_Assignment6/Task.hpp
@@ -21,10 +17,6 @@ memory
 -
 iostream
 -
-
-/home/kevin/Documents/CS3100/CS3100_Assignment6/EventQueue.cpp
-EventQueue.hpp
-/home/kevin/Documents/CS3100/CS3100_Assignment6/EventQueue.hpp
 
 /home/kevin/Documents/CS3100/CS3100_Assignment6/EventQueue.hpp
 Task.hpp
@@ -40,20 +32,14 @@ queue
 iostream
 -
 
-/home/kevin/Documents/CS3100/CS3100_Assignment6/Processor.cpp
-Processor.hpp
-/home/kevin/Documents/CS3100/CS3100_Assignment6/Processor.hpp
-
-/home/kevin/Documents/CS3100/CS3100_Assignment6/Processor.hpp
-Scheduler.hpp
-/home/kevin/Documents/CS3100/CS3100_Assignment6/Scheduler.hpp
-iostream
--
-algorithm
+/home/kevin/Documents/CS3100/CS3100_Assignment6/ReadyQueue.hpp
+Task.hpp
+/home/kevin/Documents/CS3100/CS3100_Assignment6/Task.hpp
+memory
 -
 vector
 -
-string
+iostream
 -
 
 /home/kevin/Documents/CS3100/CS3100_Assignment6/Scheduler.cpp
@@ -69,16 +55,12 @@ EventQueue.hpp
 /home/kevin/Documents/CS3100/CS3100_Assignment6/EventQueue.hpp
 Task.hpp
 /home/kevin/Documents/CS3100/CS3100_Assignment6/Task.hpp
+ReadyQueue.hpp
+/home/kevin/Documents/CS3100/CS3100_Assignment6/ReadyQueue.hpp
 
 /home/kevin/Documents/CS3100/CS3100_Assignment6/Task.hpp
 Burst.hpp
 /home/kevin/Documents/CS3100/CS3100_Assignment6/Burst.hpp
 iostream
 -
-
-/home/kevin/Documents/CS3100/CS3100_Assignment6/main.cpp
-iostream
--
-Processor.hpp
-/home/kevin/Documents/CS3100/CS3100_Assignment6/Processor.hpp
 

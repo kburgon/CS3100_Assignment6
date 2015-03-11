@@ -6,6 +6,7 @@ FILE(REMOVE_RECURSE
   "CMakeFiles/SchedulerSimulator.dir/Event.cpp.o"
   "CMakeFiles/SchedulerSimulator.dir/Task.cpp.o"
   "CMakeFiles/SchedulerSimulator.dir/Burst.cpp.o"
+  "CMakeFiles/SchedulerSimulator.dir/ReadyQueue.cpp.o"
   "SchedulerSimulator.pdb"
   "SchedulerSimulator"
 )

@@ -5,6 +5,7 @@
 #include "Event.hpp"
 #include "EventQueue.hpp"
 #include "Task.hpp"
+#include "ReadyQueue.hpp"
 
 class Scheduler
 {
@@ -16,6 +17,7 @@ private:
 	double cntxtSwitchCost;
 	int numOfIoDevs;
 	EventQueue eQueue;
+	ReadyQueue rQueue;
 public:
 	Scheduler();
 	void setNumCpus(int numToSet);
@@ -30,6 +32,7 @@ public:
 	void calcRespTime();
 	void calcPercentUtilized();
 	void calcThroughput();
+	void execTask(std::shared_ptr<Task>, double);
 };
 
 #endif

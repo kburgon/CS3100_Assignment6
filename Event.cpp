@@ -41,14 +41,14 @@ void Event::operator=(Event evToAssign)
 
 bool Event::operator>(Event toCompare) const
 {
-	std::cout << "Is " << execTime << " > " << toCompare.getTime() << "?\n";
+	// std::cout << "Is " << execTime << " > " << toCompare.getTime() << "?\n";
 	if (execTime > toCompare.getTime()) return true;
 	return false;
 }
 
 bool Event::operator<(Event toCompare) const
 {
-	std::cout << "Is " << execTime << " < " << toCompare.getTime() << "?\n";
+	// std::cout << "Is " << execTime << " < " << toCompare.getTime() << "?\n";
 	if (execTime < toCompare.getTime()) return true;
 	return false;
 }

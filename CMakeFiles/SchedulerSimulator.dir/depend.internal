@@ -21,12 +21,19 @@ CMakeFiles/SchedulerSimulator.dir/Processor.cpp.o
  /home/kevin/Documents/CS3100/CS3100_Assignment6/EventQueue.hpp
  /home/kevin/Documents/CS3100/CS3100_Assignment6/Processor.cpp
  /home/kevin/Documents/CS3100/CS3100_Assignment6/Processor.hpp
+ /home/kevin/Documents/CS3100/CS3100_Assignment6/ReadyQueue.hpp
  /home/kevin/Documents/CS3100/CS3100_Assignment6/Scheduler.hpp
+ /home/kevin/Documents/CS3100/CS3100_Assignment6/Task.hpp
+CMakeFiles/SchedulerSimulator.dir/ReadyQueue.cpp.o
+ /home/kevin/Documents/CS3100/CS3100_Assignment6/Burst.hpp
+ /home/kevin/Documents/CS3100/CS3100_Assignment6/ReadyQueue.cpp
+ /home/kevin/Documents/CS3100/CS3100_Assignment6/ReadyQueue.hpp
  /home/kevin/Documents/CS3100/CS3100_Assignment6/Task.hpp
 CMakeFiles/SchedulerSimulator.dir/Scheduler.cpp.o
  /home/kevin/Documents/CS3100/CS3100_Assignment6/Burst.hpp
  /home/kevin/Documents/CS3100/CS3100_Assignment6/Event.hpp
  /home/kevin/Documents/CS3100/CS3100_Assignment6/EventQueue.hpp
+ /home/kevin/Documents/CS3100/CS3100_Assignment6/ReadyQueue.hpp
  /home/kevin/Documents/CS3100/CS3100_Assignment6/Scheduler.cpp
  /home/kevin/Documents/CS3100/CS3100_Assignment6/Scheduler.hpp
  /home/kevin/Documents/CS3100/CS3100_Assignment6/Task.hpp
@@ -39,6 +46,7 @@ CMakeFiles/SchedulerSimulator.dir/main.cpp.o
  /home/kevin/Documents/CS3100/CS3100_Assignment6/Event.hpp
  /home/kevin/Documents/CS3100/CS3100_Assignment6/EventQueue.hpp
  /home/kevin/Documents/CS3100/CS3100_Assignment6/Processor.hpp
+ /home/kevin/Documents/CS3100/CS3100_Assignment6/ReadyQueue.hpp
  /home/kevin/Documents/CS3100/CS3100_Assignment6/Scheduler.hpp
  /home/kevin/Documents/CS3100/CS3100_Assignment6/Task.hpp
  /home/kevin/Documents/CS3100/CS3100_Assignment6/main.cpp

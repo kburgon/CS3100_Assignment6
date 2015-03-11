@@ -13,8 +13,13 @@ private:
 public:
 	void setIfIoStatus(bool);
 	Burst();
+	Burst(double, bool);
 	bool isIo();
+	double getLatency();
+	double getEndTime();
+	double getBurstTime();
 	void endBurst(int);
+	void operator=(Burst);
 };
 
 class IoBurst:public Burst

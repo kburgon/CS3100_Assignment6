@@ -3,15 +3,17 @@
 
 #include "Task.hpp"
 #include <memory>
+#include <vector>
 #include <iostream>
 
 class ReadyQueue
 {
 private:
+	std::vector<std::shared_ptr<Task>> readyList;
 public:
 	ReadyQueue();
-	void pushTask(Task* curTask);
-	Task* pullTask();
+	void pushTask(std::shared_ptr<Task> curTask);
+	std::shared_ptr<Task> pullTask();
 };
 
 #endif

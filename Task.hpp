@@ -7,19 +7,23 @@
 class Task
 {
 private:
-	bool endSession;
 	bool isIo;
-	int randomInt;
+	// int randomInt;
 	Burst burst;
 	int curBurstLoc;
 	bool firstResponse;
 public:
 	Task();
 	// Task(bool, bool, int=0);
+	int getBurstLoc();
+	bool isFirstResp();
+	Burst getBurst();
 	void endBurst(int);
 	bool curBurstIo();
 	void setTimes();
 	int getIoWaitLoc();
+	double getBurstTime();
+	void operator=(Task);
 
 };
 

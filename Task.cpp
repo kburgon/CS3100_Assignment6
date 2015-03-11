@@ -4,7 +4,6 @@
 Task::Task()
 {
 	// create burst vector
-	endSession = false;
 	isIo = false;
 	Burst newBurst;
 	burst = newBurst;
@@ -46,9 +45,38 @@ void Task::endBurst(int endTime)
 bool Task::curBurstIo()
 {
 	// return burst[curBurstLoc].isIo();
+	return burst.isIo();
 }
 
 int Task::getIoWaitLoc()
 {
 	// burst.location
+}
+
+int Task::getBurstLoc()
+{
+	return curBurstLoc;
+}
+
+bool Task::isFirstResp()
+{
+	return firstResponse;
+}
+
+Burst Task::getBurst()
+{
+	return burst;
+}
+
+double Task::getBurstTime()
+{
+	return burst.getBurstTime();
+}
+
+void Task::operator=(Task toAssign)
+{
+	isIo = curBurstIo();
+	burst = toAssign.getBurst();
+	curBurstLoc = toAssign.getBurstLoc();
+	firstResponse = toAssign.isFirstResp();
 }

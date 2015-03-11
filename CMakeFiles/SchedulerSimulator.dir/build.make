@@ -210,6 +210,29 @@ CMakeFiles/SchedulerSimulator.dir/Burst.cpp.o.provides: CMakeFiles/SchedulerSimu
 
 CMakeFiles/SchedulerSimulator.dir/Burst.cpp.o.provides.build: CMakeFiles/SchedulerSimulator.dir/Burst.cpp.o
 
+CMakeFiles/SchedulerSimulator.dir/ReadyQueue.cpp.o: CMakeFiles/SchedulerSimulator.dir/flags.make
+CMakeFiles/SchedulerSimulator.dir/ReadyQueue.cpp.o: ReadyQueue.cpp
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/kevin/Documents/CS3100/CS3100_Assignment6/CMakeFiles $(CMAKE_PROGRESS_8)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/SchedulerSimulator.dir/ReadyQueue.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/SchedulerSimulator.dir/ReadyQueue.cpp.o -c /home/kevin/Documents/CS3100/CS3100_Assignment6/ReadyQueue.cpp
+
+CMakeFiles/SchedulerSimulator.dir/ReadyQueue.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/SchedulerSimulator.dir/ReadyQueue.cpp.i"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/kevin/Documents/CS3100/CS3100_Assignment6/ReadyQueue.cpp > CMakeFiles/SchedulerSimulator.dir/ReadyQueue.cpp.i
+
+CMakeFiles/SchedulerSimulator.dir/ReadyQueue.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/SchedulerSimulator.dir/ReadyQueue.cpp.s"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/kevin/Documents/CS3100/CS3100_Assignment6/ReadyQueue.cpp -o CMakeFiles/SchedulerSimulator.dir/ReadyQueue.cpp.s
+
+CMakeFiles/SchedulerSimulator.dir/ReadyQueue.cpp.o.requires:
+.PHONY : CMakeFiles/SchedulerSimulator.dir/ReadyQueue.cpp.o.requires
+
+CMakeFiles/SchedulerSimulator.dir/ReadyQueue.cpp.o.provides: CMakeFiles/SchedulerSimulator.dir/ReadyQueue.cpp.o.requires
+	$(MAKE) -f CMakeFiles/SchedulerSimulator.dir/build.make CMakeFiles/SchedulerSimulator.dir/ReadyQueue.cpp.o.provides.build
+.PHONY : CMakeFiles/SchedulerSimulator.dir/ReadyQueue.cpp.o.provides
+
+CMakeFiles/SchedulerSimulator.dir/ReadyQueue.cpp.o.provides.build: CMakeFiles/SchedulerSimulator.dir/ReadyQueue.cpp.o
+
 # Object files for target SchedulerSimulator
 SchedulerSimulator_OBJECTS = \
 "CMakeFiles/SchedulerSimulator.dir/main.cpp.o" \
@@ -218,7 +241,8 @@ SchedulerSimulator_OBJECTS = \
 "CMakeFiles/SchedulerSimulator.dir/EventQueue.cpp.o" \
 "CMakeFiles/SchedulerSimulator.dir/Event.cpp.o" \
 "CMakeFiles/SchedulerSimulator.dir/Task.cpp.o" \
-"CMakeFiles/SchedulerSimulator.dir/Burst.cpp.o"
+"CMakeFiles/SchedulerSimulator.dir/Burst.cpp.o" \
+"CMakeFiles/SchedulerSimulator.dir/ReadyQueue.cpp.o"
 
 # External object files for target SchedulerSimulator
 SchedulerSimulator_EXTERNAL_OBJECTS =
@@ -230,6 +254,7 @@ SchedulerSimulator: CMakeFiles/SchedulerSimulator.dir/EventQueue.cpp.o
 SchedulerSimulator: CMakeFiles/SchedulerSimulator.dir/Event.cpp.o
 SchedulerSimulator: CMakeFiles/SchedulerSimulator.dir/Task.cpp.o
 SchedulerSimulator: CMakeFiles/SchedulerSimulator.dir/Burst.cpp.o
+SchedulerSimulator: CMakeFiles/SchedulerSimulator.dir/ReadyQueue.cpp.o
 SchedulerSimulator: CMakeFiles/SchedulerSimulator.dir/build.make
 SchedulerSimulator: CMakeFiles/SchedulerSimulator.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --red --bold "Linking CXX executable SchedulerSimulator"
@@ -246,6 +271,7 @@ CMakeFiles/SchedulerSimulator.dir/requires: CMakeFiles/SchedulerSimulator.dir/Ev
 CMakeFiles/SchedulerSimulator.dir/requires: CMakeFiles/SchedulerSimulator.dir/Event.cpp.o.requires
 CMakeFiles/SchedulerSimulator.dir/requires: CMakeFiles/SchedulerSimulator.dir/Task.cpp.o.requires
 CMakeFiles/SchedulerSimulator.dir/requires: CMakeFiles/SchedulerSimulator.dir/Burst.cpp.o.requires
+CMakeFiles/SchedulerSimulator.dir/requires: CMakeFiles/SchedulerSimulator.dir/ReadyQueue.cpp.o.requires
 .PHONY : CMakeFiles/SchedulerSimulator.dir/requires
 
 CMakeFiles/SchedulerSimulator.dir/clean:

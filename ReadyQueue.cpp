@@ -1,17 +1,19 @@
 // ready queue pseudocode
+#include "ReadyQueue.hpp"
 
 ReadyQueue::ReadyQueue()
 {
-	// set queue as a vector
+	std::cout << "Started ready queue...\n";
 }
 
-ReadyQueue::pushTask(Task *curTask)
+void ReadyQueue::pushTask(std::shared_ptr<Task> curTask)
 {
-	// add task to queue
+	readyList.push_back(curTask);
 }
 
-Task* ReadyQueue::pullTask()
+std::shared_ptr<Task> ReadyQueue::pullTask()
 {
-	// pulls task item
-	// returns task item
+	std::shared_ptr<Task> toPull = readyList.back();
+	readyList.pop_back();
+	return toPull;
 }

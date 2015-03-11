@@ -14,6 +14,8 @@ set(Sources
 	Task.cpp
 	Burst.hpp
 	Burst.cpp
+	ReadyQueue.hpp
+	ReadyQueue.cpp
 )
 
 set(CMAKE_CXX_FLAGS --std=c++11)

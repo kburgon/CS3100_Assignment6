@@ -207,6 +207,30 @@ Processor.cpp.s:
 	$(MAKE) -f CMakeFiles/SchedulerSimulator.dir/build.make CMakeFiles/SchedulerSimulator.dir/Processor.cpp.s
 .PHONY : Processor.cpp.s
 
+ReadyQueue.o: ReadyQueue.cpp.o
+.PHONY : ReadyQueue.o
+
+# target to build an object file
+ReadyQueue.cpp.o:
+	$(MAKE) -f CMakeFiles/SchedulerSimulator.dir/build.make CMakeFiles/SchedulerSimulator.dir/ReadyQueue.cpp.o
+.PHONY : ReadyQueue.cpp.o
+
+ReadyQueue.i: ReadyQueue.cpp.i
+.PHONY : ReadyQueue.i
+
+# target to preprocess a source file
+ReadyQueue.cpp.i:
+	$(MAKE) -f CMakeFiles/SchedulerSimulator.dir/build.make CMakeFiles/SchedulerSimulator.dir/ReadyQueue.cpp.i
+.PHONY : ReadyQueue.cpp.i
+
+ReadyQueue.s: ReadyQueue.cpp.s
+.PHONY : ReadyQueue.s
+
+# target to generate assembly for a file
+ReadyQueue.cpp.s:
+	$(MAKE) -f CMakeFiles/SchedulerSimulator.dir/build.make CMakeFiles/SchedulerSimulator.dir/ReadyQueue.cpp.s
+.PHONY : ReadyQueue.cpp.s
+
 Scheduler.o: Scheduler.cpp.o
 .PHONY : Scheduler.o
 
@@ -300,6 +324,9 @@ help:
 	@echo "... Processor.o"
 	@echo "... Processor.i"
 	@echo "... Processor.s"
+	@echo "... ReadyQueue.o"
+	@echo "... ReadyQueue.i"
+	@echo "... ReadyQueue.s"
 	@echo "... Scheduler.o"
 	@echo "... Scheduler.i"
 	@echo "... Scheduler.s"
