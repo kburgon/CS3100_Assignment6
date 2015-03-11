@@ -159,6 +159,30 @@ Event.cpp.s:
 	$(MAKE) -f CMakeFiles/SchedulerSimulator.dir/build.make CMakeFiles/SchedulerSimulator.dir/Event.cpp.s
 .PHONY : Event.cpp.s
 
+EventQueue.o: EventQueue.cpp.o
+.PHONY : EventQueue.o
+
+# target to build an object file
+EventQueue.cpp.o:
+	$(MAKE) -f CMakeFiles/SchedulerSimulator.dir/build.make CMakeFiles/SchedulerSimulator.dir/EventQueue.cpp.o
+.PHONY : EventQueue.cpp.o
+
+EventQueue.i: EventQueue.cpp.i
+.PHONY : EventQueue.i
+
+# target to preprocess a source file
+EventQueue.cpp.i:
+	$(MAKE) -f CMakeFiles/SchedulerSimulator.dir/build.make CMakeFiles/SchedulerSimulator.dir/EventQueue.cpp.i
+.PHONY : EventQueue.cpp.i
+
+EventQueue.s: EventQueue.cpp.s
+.PHONY : EventQueue.s
+
+# target to generate assembly for a file
+EventQueue.cpp.s:
+	$(MAKE) -f CMakeFiles/SchedulerSimulator.dir/build.make CMakeFiles/SchedulerSimulator.dir/EventQueue.cpp.s
+.PHONY : EventQueue.cpp.s
+
 Processor.o: Processor.cpp.o
 .PHONY : Processor.o
 
@@ -270,6 +294,9 @@ help:
 	@echo "... Event.o"
 	@echo "... Event.i"
 	@echo "... Event.s"
+	@echo "... EventQueue.o"
+	@echo "... EventQueue.i"
+	@echo "... EventQueue.s"
 	@echo "... Processor.o"
 	@echo "... Processor.i"
 	@echo "... Processor.s"

@@ -1,6 +1,8 @@
 #ifndef BURST_HPP
 #define BURST_HPP
 
+#include <iostream>
+
 class Burst
 {
 private:

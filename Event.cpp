@@ -3,13 +3,15 @@
 
 Event::Event()
 {
+	std::cout << "constructing event...\n";
 	execTime = 0;
 	relatedTask = nullptr;
 	endSession = true;
 }
 
-Event::Event(Task* taskToRelate, double newExecTime, bool setEndSession)
+Event::Event(std::shared_ptr<Task> taskToRelate, double newExecTime, bool setEndSession)
 {
+	std::cout << "constructing event...\n";
 	relatedTask = taskToRelate;
 	execTime = newExecTime;
 	endSession = setEndSession;
@@ -25,7 +27,7 @@ double Event::getTime()
 	return execTime;
 }
 
-Task* Event::getRelatedTask()
+std::shared_ptr<Task> Event::getRelatedTask()
 {
 	return relatedTask;
 }
@@ -37,7 +39,20 @@ void Event::operator=(Event evToAssign)
 	relatedTask = evToAssign.getRelatedTask();
 }
 
-Event::~Event()
+bool Event::operator>(Event toCompare) const
 {
-	delete relatedTask;
+	std::cout << "Is " << execTime << " > " << toCompare.getTime() << "?\n";
+	if (execTime > toCompare.getTime()) return true;
+	return false;
 }
+
+bool Event::operator<(Event toCompare) const
+{
+	std::cout << "Is " << execTime << " < " << toCompare.getTime() << "?\n";
+	if (execTime < toCompare.getTime()) return true;
+	return false;
+}
+// Event::~Event()
+// {
+// 	delete relatedTask;
+// }

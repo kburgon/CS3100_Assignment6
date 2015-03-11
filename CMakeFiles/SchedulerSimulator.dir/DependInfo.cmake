@@ -6,6 +6,7 @@ SET(CMAKE_DEPENDS_LANGUAGES
 SET(CMAKE_DEPENDS_CHECK_CXX
   "/home/kevin/Documents/CS3100/CS3100_Assignment6/Burst.cpp" "/home/kevin/Documents/CS3100/CS3100_Assignment6/CMakeFiles/SchedulerSimulator.dir/Burst.cpp.o"
   "/home/kevin/Documents/CS3100/CS3100_Assignment6/Event.cpp" "/home/kevin/Documents/CS3100/CS3100_Assignment6/CMakeFiles/SchedulerSimulator.dir/Event.cpp.o"
+  "/home/kevin/Documents/CS3100/CS3100_Assignment6/EventQueue.cpp" "/home/kevin/Documents/CS3100/CS3100_Assignment6/CMakeFiles/SchedulerSimulator.dir/EventQueue.cpp.o"
   "/home/kevin/Documents/CS3100/CS3100_Assignment6/Processor.cpp" "/home/kevin/Documents/CS3100/CS3100_Assignment6/CMakeFiles/SchedulerSimulator.dir/Processor.cpp.o"
   "/home/kevin/Documents/CS3100/CS3100_Assignment6/Scheduler.cpp" "/home/kevin/Documents/CS3100/CS3100_Assignment6/CMakeFiles/SchedulerSimulator.dir/Scheduler.cpp.o"
   "/home/kevin/Documents/CS3100/CS3100_Assignment6/Task.cpp" "/home/kevin/Documents/CS3100/CS3100_Assignment6/CMakeFiles/SchedulerSimulator.dir/Task.cpp.o"

@@ -3,6 +3,8 @@
 
 #include <iostream>
 #include "Event.hpp"
+#include "EventQueue.hpp"
+#include "Task.hpp"
 
 class Scheduler
 {
@@ -13,6 +15,7 @@ private:
 	double taskCreateFreq;
 	double cntxtSwitchCost;
 	int numOfIoDevs;
+	EventQueue eQueue;
 public:
 	Scheduler();
 	void setNumCpus(int numToSet);

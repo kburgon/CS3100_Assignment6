@@ -10,13 +10,14 @@ Task::Task()
 	burst = newBurst;
 	curBurstLoc = 0;
 	firstResponse = true;
+	std::cout << "Constructing task...\n";
 	// generate random int
-	for (int n = 0; n < randomInt; n++)
-	{
-		// if setIo == false create burst()
-		// if setIo == true create burst(waitSpot)
-		// add to burstVector
-	}
+	// for (int n = 0; n < randomInt; n++)
+	// {
+	// 	// if setIo == false create burst()
+	// 	// if setIo == true create burst(waitSpot)
+	// 	// add to burstVector
+	// }
 }
 
 // Task::Task(bool isEndSession, bool setIsIo, int waitSpot);

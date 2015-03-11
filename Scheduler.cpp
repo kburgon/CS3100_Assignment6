@@ -1,4 +1,3 @@
-// Scheduler class 
 #include "Scheduler.hpp"
 
 Scheduler::Scheduler()
@@ -41,10 +40,14 @@ void Scheduler::init()
 	// IOQueues waitQueue(numOfIoDevs);
 	// ReadyQueue readyQ;
 	// create task
-	// load task on event queue
-	// EventQueue processEvent(cntxtSwitchCost);
-	// create new task and event
-	// processEvent.addEvent(newTask);
+	std::shared_ptr<Task> initTask = std::make_shared<Task>();
+	std::shared_ptr<Task> endTask = std::make_shared<Task>();
+	// create new event
+	Event firstEvent(initTask, 0);
+	Event lastEvent(endTask, 100, true);
+	// load events on event queue
+	eQueue.addEvent(firstEvent);
+	eQueue.addEvent(lastEvent);
 	// load schedule end event
 	runSession();
 }
@@ -54,7 +57,20 @@ void Scheduler::runSession()
 	std::cout << "Running session...\n";
 	bool endOfSession = false;
 	Event curEvent;
-	// Task* curTask;
+	while (!endOfSession && !eQueue.isEmpty())
+	{
+		curEvent = eQueue.pullEvent();
+		if (curEvent.willEndSession())
+		{
+			endOfSession = true;
+			std::cout << "Ending session now with time at " << curEvent.getTime() << "\n";
+		}
+		else 
+		{
+			std::cout << "Not ending session yet...\n";
+		}
+	}
+	// std::shared_ptr<Task> curTask;
 	// while (!endOfSession)
 	// {
 	// 	curEvent = processEvent.pullEvent();

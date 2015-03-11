@@ -2,6 +2,7 @@
 #define TASK_HPP
 
 #include "Burst.hpp"
+#include <iostream>
 
 class Task
 {

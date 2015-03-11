@@ -118,9 +118,32 @@ CMakeFiles/SchedulerSimulator.dir/Scheduler.cpp.o.provides: CMakeFiles/Scheduler
 
 CMakeFiles/SchedulerSimulator.dir/Scheduler.cpp.o.provides.build: CMakeFiles/SchedulerSimulator.dir/Scheduler.cpp.o
 
+CMakeFiles/SchedulerSimulator.dir/EventQueue.cpp.o: CMakeFiles/SchedulerSimulator.dir/flags.make
+CMakeFiles/SchedulerSimulator.dir/EventQueue.cpp.o: EventQueue.cpp
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/kevin/Documents/CS3100/CS3100_Assignment6/CMakeFiles $(CMAKE_PROGRESS_4)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/SchedulerSimulator.dir/EventQueue.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/SchedulerSimulator.dir/EventQueue.cpp.o -c /home/kevin/Documents/CS3100/CS3100_Assignment6/EventQueue.cpp
+
+CMakeFiles/SchedulerSimulator.dir/EventQueue.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/SchedulerSimulator.dir/EventQueue.cpp.i"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/kevin/Documents/CS3100/CS3100_Assignment6/EventQueue.cpp > CMakeFiles/SchedulerSimulator.dir/EventQueue.cpp.i
+
+CMakeFiles/SchedulerSimulator.dir/EventQueue.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/SchedulerSimulator.dir/EventQueue.cpp.s"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/kevin/Documents/CS3100/CS3100_Assignment6/EventQueue.cpp -o CMakeFiles/SchedulerSimulator.dir/EventQueue.cpp.s
+
+CMakeFiles/SchedulerSimulator.dir/EventQueue.cpp.o.requires:
+.PHONY : CMakeFiles/SchedulerSimulator.dir/EventQueue.cpp.o.requires
+
+CMakeFiles/SchedulerSimulator.dir/EventQueue.cpp.o.provides: CMakeFiles/SchedulerSimulator.dir/EventQueue.cpp.o.requires
+	$(MAKE) -f CMakeFiles/SchedulerSimulator.dir/build.make CMakeFiles/SchedulerSimulator.dir/EventQueue.cpp.o.provides.build
+.PHONY : CMakeFiles/SchedulerSimulator.dir/EventQueue.cpp.o.provides
+
+CMakeFiles/SchedulerSimulator.dir/EventQueue.cpp.o.provides.build: CMakeFiles/SchedulerSimulator.dir/EventQueue.cpp.o
+
 CMakeFiles/SchedulerSimulator.dir/Event.cpp.o: CMakeFiles/SchedulerSimulator.dir/flags.make
 CMakeFiles/SchedulerSimulator.dir/Event.cpp.o: Event.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/kevin/Documents/CS3100/CS3100_Assignment6/CMakeFiles $(CMAKE_PROGRESS_4)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/kevin/Documents/CS3100/CS3100_Assignment6/CMakeFiles $(CMAKE_PROGRESS_5)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/SchedulerSimulator.dir/Event.cpp.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/SchedulerSimulator.dir/Event.cpp.o -c /home/kevin/Documents/CS3100/CS3100_Assignment6/Event.cpp
 
@@ -143,7 +166,7 @@ CMakeFiles/SchedulerSimulator.dir/Event.cpp.o.provides.build: CMakeFiles/Schedul
 
 CMakeFiles/SchedulerSimulator.dir/Task.cpp.o: CMakeFiles/SchedulerSimulator.dir/flags.make
 CMakeFiles/SchedulerSimulator.dir/Task.cpp.o: Task.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/kevin/Documents/CS3100/CS3100_Assignment6/CMakeFiles $(CMAKE_PROGRESS_5)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/kevin/Documents/CS3100/CS3100_Assignment6/CMakeFiles $(CMAKE_PROGRESS_6)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/SchedulerSimulator.dir/Task.cpp.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/SchedulerSimulator.dir/Task.cpp.o -c /home/kevin/Documents/CS3100/CS3100_Assignment6/Task.cpp
 
@@ -166,7 +189,7 @@ CMakeFiles/SchedulerSimulator.dir/Task.cpp.o.provides.build: CMakeFiles/Schedule
 
 CMakeFiles/SchedulerSimulator.dir/Burst.cpp.o: CMakeFiles/SchedulerSimulator.dir/flags.make
 CMakeFiles/SchedulerSimulator.dir/Burst.cpp.o: Burst.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/kevin/Documents/CS3100/CS3100_Assignment6/CMakeFiles $(CMAKE_PROGRESS_6)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/kevin/Documents/CS3100/CS3100_Assignment6/CMakeFiles $(CMAKE_PROGRESS_7)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/SchedulerSimulator.dir/Burst.cpp.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/SchedulerSimulator.dir/Burst.cpp.o -c /home/kevin/Documents/CS3100/CS3100_Assignment6/Burst.cpp
 
@@ -192,6 +215,7 @@ SchedulerSimulator_OBJECTS = \
 "CMakeFiles/SchedulerSimulator.dir/main.cpp.o" \
 "CMakeFiles/SchedulerSimulator.dir/Processor.cpp.o" \
 "CMakeFiles/SchedulerSimulator.dir/Scheduler.cpp.o" \
+"CMakeFiles/SchedulerSimulator.dir/EventQueue.cpp.o" \
 "CMakeFiles/SchedulerSimulator.dir/Event.cpp.o" \
 "CMakeFiles/SchedulerSimulator.dir/Task.cpp.o" \
 "CMakeFiles/SchedulerSimulator.dir/Burst.cpp.o"
@@ -202,6 +226,7 @@ SchedulerSimulator_EXTERNAL_OBJECTS =
 SchedulerSimulator: CMakeFiles/SchedulerSimulator.dir/main.cpp.o
 SchedulerSimulator: CMakeFiles/SchedulerSimulator.dir/Processor.cpp.o
 SchedulerSimulator: CMakeFiles/SchedulerSimulator.dir/Scheduler.cpp.o
+SchedulerSimulator: CMakeFiles/SchedulerSimulator.dir/EventQueue.cpp.o
 SchedulerSimulator: CMakeFiles/SchedulerSimulator.dir/Event.cpp.o
 SchedulerSimulator: CMakeFiles/SchedulerSimulator.dir/Task.cpp.o
 SchedulerSimulator: CMakeFiles/SchedulerSimulator.dir/Burst.cpp.o
@@ -217,6 +242,7 @@ CMakeFiles/SchedulerSimulator.dir/build: SchedulerSimulator
 CMakeFiles/SchedulerSimulator.dir/requires: CMakeFiles/SchedulerSimulator.dir/main.cpp.o.requires
 CMakeFiles/SchedulerSimulator.dir/requires: CMakeFiles/SchedulerSimulator.dir/Processor.cpp.o.requires
 CMakeFiles/SchedulerSimulator.dir/requires: CMakeFiles/SchedulerSimulator.dir/Scheduler.cpp.o.requires
+CMakeFiles/SchedulerSimulator.dir/requires: CMakeFiles/SchedulerSimulator.dir/EventQueue.cpp.o.requires
 CMakeFiles/SchedulerSimulator.dir/requires: CMakeFiles/SchedulerSimulator.dir/Event.cpp.o.requires
 CMakeFiles/SchedulerSimulator.dir/requires: CMakeFiles/SchedulerSimulator.dir/Task.cpp.o.requires
 CMakeFiles/SchedulerSimulator.dir/requires: CMakeFiles/SchedulerSimulator.dir/Burst.cpp.o.requires

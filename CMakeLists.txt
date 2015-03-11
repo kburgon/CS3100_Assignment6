@@ -6,6 +6,8 @@ set(Sources
 	Processor.cpp
 	Scheduler.hpp
 	Scheduler.cpp
+	EventQueue.hpp
+	EventQueue.cpp
 	Event.hpp
 	Event.cpp
 	Task.hpp

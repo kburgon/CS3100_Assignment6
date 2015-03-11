@@ -2,21 +2,25 @@
 #define EVENT_HPP
 
 #include "Task.hpp"
+#include <memory>
+#include <iostream>
 
 class Event
 {
 private:
 	double execTime;
-	Task* relatedTask;
+	std::shared_ptr<Task> relatedTask;
 	bool endSession;
 public:
 	Event();
-	Event(Task*, double, bool=false);
+	Event(std::shared_ptr<Task>, double, bool=false);
 	bool willEndSession();
 	double getTime();
-	Task* getRelatedTask();
+	std::shared_ptr<Task> getRelatedTask();
 	void operator=(Event);
-	~Event();
+	bool operator>(Event) const;
+	bool operator<(Event) const;
+	// ~Event();
 };
 
 #endif
