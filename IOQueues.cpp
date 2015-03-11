@@ -1,4 +1,5 @@
 // has a vector of queues (of vectors)
+#include "IOQueues.hpp"
 
 IOQueues::IOQueues(int numOfQueues)
 {

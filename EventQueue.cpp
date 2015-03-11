@@ -1,4 +1,5 @@
 // EventQueue pseudocode
+#include "EventQueue.hpp"
 
 EventQueue::addEvent(Task *curTask, int curTime)
 {
