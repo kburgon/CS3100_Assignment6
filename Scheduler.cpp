@@ -78,7 +78,7 @@ void Scheduler::runSession()
 		}
 		else 
 		{
-			std::cout << "Not ending session yet...\n";
+			std::cout << "Not ending session yet!  Time: " << curEvent.getTime() << "\n";
 			curTask = curEvent.getRelatedTask();
 			if (numCpus > 0)
 			{
