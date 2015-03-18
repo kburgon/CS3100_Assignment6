@@ -54,12 +54,20 @@ void Scheduler::init()
 
 void Scheduler::execTask(std::shared_ptr<Task> exTask, double curTime)
 {
-	std::cout << "Executing task...\n";
+	// std::cout << "Executing task...\n";
 	exTask->endBurst(curTime);
-	double nextEventTime = curTime + cntxtSwitchCost + exTask->getBurstTime();
-	Event nextEvent(exTask, nextEventTime);
+	if (!exTask->taskIsCompleted())
+	{
+		double nextEventTime = curTime + cntxtSwitchCost + exTask->getBurstTime();
+		Event nextEvent(exTask, nextEventTime);
+		eQueue.addEvent(nextEvent);
+	}
+	else
+	{
+		std::cout << "The task has finished.\n";
+	}
 	// numCpus--;
-	eQueue.addEvent(nextEvent);
+	
 }
 
 void Scheduler::runSession()
@@ -68,8 +76,9 @@ void Scheduler::runSession()
 	bool endOfSession = false;
 	Event curEvent;
 	std::shared_ptr<Task> curTask;
-	while (!endOfSession && !eQueue.isEmpty())
+	while (!endOfSession)
 	{
+		std::cout << "Starting loop again...\n";
 		curEvent = eQueue.pullEvent();
 		if (curEvent.willEndSession())
 		{
@@ -89,7 +98,9 @@ void Scheduler::runSession()
 				rQueue.pushTask(curTask);
 			}
 		}
+		std::cout << "How about now?\n";
 	}
+	std::cout << "Has it segfaulted yet?\n";
 	// std::shared_ptr<Task> curTask;
 	// while (!endOfSession)
 	// {

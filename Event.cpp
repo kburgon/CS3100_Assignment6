@@ -3,7 +3,7 @@
 
 Event::Event()
 {
-	std::cout << "constructing event...\n";
+	// std::cout << "constructing event...\n";
 	execTime = 0;
 	relatedTask = nullptr;
 	endSession = true;
@@ -11,7 +11,7 @@ Event::Event()
 
 Event::Event(std::shared_ptr<Task> taskToRelate, double newExecTime, bool setEndSession)
 {
-	std::cout << "constructing event...\n";
+	// std::cout << "constructing event...\n";
 	relatedTask = taskToRelate;
 	execTime = newExecTime;
 	endSession = setEndSession;

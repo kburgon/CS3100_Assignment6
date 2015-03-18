@@ -3,7 +3,7 @@
 
 void EventQueue::addEvent(Event newEvent)
 {
-	std::cout << "Running add event...\n";
+	// std::cout << "Running add event...\n";
 	pq.push(newEvent);
 	// check if io event
 	// if so set time to curTime + curTask.time

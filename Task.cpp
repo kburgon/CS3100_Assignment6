@@ -6,9 +6,16 @@ Task::Task()
 	// create burst vector
 	isIo = false;
 	Burst newBurst;
-	burst = newBurst;
+	numOfBursts = 0;
+	for (int n = 0; n < 10; n++)
+	{
+		bursts.push_back(newBurst);
+		numOfBursts++;
+	}
+	// burst = newBurst;
 	curBurstLoc = 0;
 	firstResponse = true;
+	isCompleted = false;
 	std::cout << "Constructing task...\n";
 	// generate random int
 	// for (int n = 0; n < randomInt; n++)
@@ -33,19 +40,26 @@ void Task::setTimes()
 
 void Task::endBurst(int endTime)
 {
-	if (burst.isIo() && firstResponse == true)
+	// if (burst.isIo() && firstResponse == true)
+	if (bursts[curBurstLoc].isIo() && firstResponse == true)
 	{
 		firstResponse = false;
 		// set firstResponse time to curTime
 	}
+	// bursts[curBurstLoc].endBurst(endTime);
 	burst.endBurst(endTime);
 	curBurstLoc++;
+	if (curBurstLoc == numOfBursts)
+	{
+		std::cout << "Shutting down task...\n";
+		curBurstLoc = numOfBursts - 1;
+	}
 }
 
 bool Task::curBurstIo()
 {
-	// return burst[curBurstLoc].isIo();
-	return burst.isIo();
+	return bursts[curBurstLoc].isIo();
+	// return burst.isIo();
 }
 
 int Task::getIoWaitLoc()
@@ -70,13 +84,25 @@ Burst Task::getBurst()
 
 double Task::getBurstTime()
 {
-	return burst.getBurstTime();
+	return bursts[curBurstLoc].getBurstTime();
+	// return burst.getBurstTime();
 }
 
 void Task::operator=(Task toAssign)
 {
 	isIo = curBurstIo();
-	burst = toAssign.getBurst();
+	// burst = toAssign.getBurst();
+	bursts = toAssign.assignBursts();
 	curBurstLoc = toAssign.getBurstLoc();
 	firstResponse = toAssign.isFirstResp();
+}
+
+std::vector<Burst> Task::assignBursts()
+{
+	return bursts;
+}
+
+bool Task::taskIsCompleted()
+{
+	return isCompleted;
 }
