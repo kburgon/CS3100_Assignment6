@@ -11,6 +11,7 @@ class Scheduler
 {
 private:
 	// std::vector<Task*> tasks;
+	double curTime;
 	int numCpus;
 	double cpuVsIo;
 	double taskCreateFreq;
@@ -18,6 +19,7 @@ private:
 	int numOfIoDevs;
 	EventQueue eQueue;
 	ReadyQueue rQueue;
+	void createTasks(int);
 public:
 	Scheduler();
 	void setNumCpus(int numToSet);
@@ -32,7 +34,7 @@ public:
 	void calcRespTime();
 	void calcPercentUtilized();
 	void calcThroughput();
-	void execTask(std::shared_ptr<Task>, double);
+	void execTask(std::shared_ptr<Task>);
 };
 
 #endif

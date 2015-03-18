@@ -14,7 +14,7 @@ void Processor::showHelpText()
 		<< "	set taskcreatefreq [value] - sets the frequency of task creations (in time)\n"
 		<< "	set cswitchtime [value] - sets the context switch time of the simulator\n"
 		<< "	set iodevicenum [value] - sets the number of io devices in the simulator\n"
-		<< "	runscheduler - run the scheduler\n";
+		<< "	run - run the scheduler\n";
 }
 
 void Processor::startShell()
@@ -68,7 +68,7 @@ void Processor::startShell()
 				std::cout << "Number of IO devices set to " << setInt << ",\n";
 			}
 		}
-		else if (cmd == "runscheduler")
+		else if (cmd == "run")
 		{
 			Scheduler mainScheduler;
 			mainScheduler.init();

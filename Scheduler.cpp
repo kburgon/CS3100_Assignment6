@@ -7,6 +7,7 @@ Scheduler::Scheduler()
 	taskCreateFreq = 0.5;
 	cntxtSwitchCost = 0.2;
 	numOfIoDevs = 1;
+	curTime = 0;
 }
 
 void Scheduler::setNumCpus(int numToSet)
@@ -52,13 +53,29 @@ void Scheduler::init()
 	runSession();
 }
 
-void Scheduler::execTask(std::shared_ptr<Task> exTask, double curTime)
+void Scheduler::createTasks(int numOfTasks)
+{
+	std::shared_ptr<Task> taskToAdd;
+	Event eventToAdd;
+	double newTaskExecTime;
+	for (int n = 0; n < numOfTasks; n++)
+	{
+		taskToAdd = std::make_shared<Task>();
+		newTaskExecTime = curTime + taskToAdd->getBurstTime();
+		eventToAdd = Event(taskToAdd, newTaskExecTime);
+	}
+}
+
+void Scheduler::execTask(std::shared_ptr<Task> exTask)
 {
 	// std::cout << "Executing task...\n";
+	double timeToEvent = cntxtSwitchCost + exTask->getBurstTime();
+	int tasksToCreate = timeToEvent / taskCreateFreq;
+	createTasks(tasksToCreate);
 	exTask->endBurst(curTime);
 	if (!exTask->taskIsCompleted())
 	{
-		double nextEventTime = curTime + cntxtSwitchCost + exTask->getBurstTime();
+		double nextEventTime = curTime + timeToEvent;
 		Event nextEvent(exTask, nextEventTime);
 		eQueue.addEvent(nextEvent);
 	}
@@ -72,7 +89,7 @@ void Scheduler::execTask(std::shared_ptr<Task> exTask, double curTime)
 
 void Scheduler::runSession()
 {
-	std::cout << "Running session...\n";
+	// std::cout << "Running session...\n";
 	bool endOfSession = false;
 	Event curEvent;
 	std::shared_ptr<Task> curTask;
@@ -80,27 +97,29 @@ void Scheduler::runSession()
 	{
 		std::cout << "Starting loop again...\n";
 		curEvent = eQueue.pullEvent();
+		curTime = curEvent.getTime();
 		if (curEvent.willEndSession())
 		{
 			endOfSession = true;
 			std::cout << "Ending session now with time at " << curEvent.getTime() << "\n";
 		}
-		else 
+		else
 		{
+			// exec readyQueue task here
 			std::cout << "Not ending session yet!  Time: " << curEvent.getTime() << "\n";
 			curTask = curEvent.getRelatedTask();
 			if (numCpus > 0)
 			{
-				execTask(curTask, curEvent.getTime());
+				execTask(curTask);
 			}
 			else
 			{
 				rQueue.pushTask(curTask);
 			}
 		}
-		std::cout << "How about now?\n";
+		// std::cout << "How about now?\n";
 	}
-	std::cout << "Has it segfaulted yet?\n";
+	// std::cout << "Has it segfaulted yet?\n";
 	// std::shared_ptr<Task> curTask;
 	// while (!endOfSession)
 	// {
