@@ -3,9 +3,9 @@
 Scheduler::Scheduler()
 {
 	numCpus = 1;
-	cpuVsIo = 0.5;
-	taskCreateFreq = 0.5;
-	cntxtSwitchCost = 0.2;
+	cpuVsIo = 1;
+	taskCreateFreq = 1;
+	cntxtSwitchCost = 1;
 	numOfIoDevs = 1;
 	curTime = 0;
 }
@@ -63,6 +63,7 @@ void Scheduler::createTasks(int numOfTasks)
 		taskToAdd = std::make_shared<Task>();
 		newTaskExecTime = curTime + taskToAdd->getBurstTime();
 		eventToAdd = Event(taskToAdd, newTaskExecTime);
+		eQueue.addEvent(eventToAdd);
 	}
 }
 
@@ -70,8 +71,6 @@ void Scheduler::execTask(std::shared_ptr<Task> exTask)
 {
 	// std::cout << "Executing task...\n";
 	double timeToEvent = cntxtSwitchCost + exTask->getBurstTime();
-	int tasksToCreate = timeToEvent / taskCreateFreq;
-	createTasks(tasksToCreate);
 	exTask->endBurst(curTime);
 	if (!exTask->taskIsCompleted())
 	{
@@ -93,11 +92,14 @@ void Scheduler::runSession()
 	bool endOfSession = false;
 	Event curEvent;
 	std::shared_ptr<Task> curTask;
+	double lastEventTime = 0;
+	double timeFromLastE;
 	while (!endOfSession)
 	{
-		std::cout << "Starting loop again...\n";
+		// std::cout << "Starting loop again...\n";
 		curEvent = eQueue.pullEvent();
 		curTime = curEvent.getTime();
+		timeFromLastE = curTime - lastEventTime;
 		if (curEvent.willEndSession())
 		{
 			endOfSession = true;
@@ -108,6 +110,9 @@ void Scheduler::runSession()
 			// exec readyQueue task here
 			std::cout << "Not ending session yet!  Time: " << curEvent.getTime() << "\n";
 			curTask = curEvent.getRelatedTask();
+			int tasksToCreate = timeFromLastE / taskCreateFreq;
+			std::cout << "Amount of tasks that will be created: " << tasksToCreate << std::endl;
+			createTasks(tasksToCreate);
 			if (numCpus > 0)
 			{
 				execTask(curTask);
@@ -116,6 +121,7 @@ void Scheduler::runSession()
 			{
 				rQueue.pushTask(curTask);
 			}
+			lastEventTime = curTime;
 		}
 		// std::cout << "How about now?\n";
 	}

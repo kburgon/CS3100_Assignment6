@@ -4,8 +4,32 @@
 		"selected_items":
 		[
 			[
+				"tasks",
+				"tasksToCreate"
+			],
+			[
+				"time",
+				"timeToEvent"
+			],
+			[
+				"create",
+				"createTasks"
+			],
+			[
+				"tas",
+				"taskToAdd"
+			],
+			[
+				"event",
+				"eventToAdd"
+			],
+			[
 				"num",
-				"numOfBursts"
+				"numOfTasks"
+			],
+			[
+				"get",
+				"getBurstTime"
 			],
 			[
 				"nu",
@@ -55,7 +79,7 @@
 			"file": "Scheduler.cpp",
 			"settings":
 			{
-				"buffer_size": 2863,
+				"buffer_size": 3536,
 				"line_ending": "Unix"
 			}
 		},
@@ -72,6 +96,14 @@
 			"settings":
 			{
 				"buffer_size": 1884,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "Processor.cpp",
+			"settings":
+			{
+				"buffer_size": 2659,
 				"line_ending": "Unix"
 			}
 		}
@@ -139,7 +171,7 @@
 	"groups":
 	[
 		{
-			"selected": 1,
+			"selected": 0,
 			"sheets":
 			[
 				{
@@ -155,8 +187,8 @@
 						"selection":
 						[
 							[
-								134,
-								134
+								83,
+								83
 							]
 						],
 						"settings":
@@ -165,10 +197,10 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 180.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 6,
+					"stack_index": 2,
 					"type": "text"
 				},
 				{
@@ -193,7 +225,7 @@
 							"syntax": "Packages/C++/C++.tmLanguage",
 							"translate_tabs_to_spaces": false
 						},
-						"translation.x": -0.0,
+						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
@@ -226,7 +258,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 5,
+					"stack_index": 7,
 					"type": "text"
 				},
 				{
@@ -254,13 +286,13 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 4,
+					"stack_index": 6,
 					"type": "text"
 				}
 			]
 		},
 		{
-			"selected": 2,
+			"selected": 0,
 			"sheets":
 			[
 				{
@@ -269,15 +301,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2863,
+						"buffer_size": 3536,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1408,
-								1408
+								1787,
+								1787
 							]
 						],
 						"settings":
@@ -286,10 +318,10 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 786.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 0,
 					"type": "text"
 				},
 				{
@@ -318,7 +350,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 5,
 					"type": "text"
 				},
 				{
@@ -344,10 +376,38 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 127.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "Processor.cpp",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2659,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1815,
+								1815
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 900.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
 					"type": "text"
 				}
 			]

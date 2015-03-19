@@ -3,7 +3,7 @@
 
 Burst::Burst()
 {
-	bTime = 1;
+	bTime = 5;
 	endTime = 0;
 	isIoBurst = false;
 	latency = 0;
