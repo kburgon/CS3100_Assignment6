@@ -1,4 +1,3 @@
-// has a vector of queues (of vectors)
 #include "IOQueues.hpp"
 
 IOQueues::IOQueues(int numOfQueues)
@@ -8,27 +7,43 @@ IOQueues::IOQueues(int numOfQueues)
 
 void IOQueues::createQueues(int numOfQueues)
 {
-	std::vector<Task*> newQueue;
+	std::vector<std::shared_ptr<Task>> newQueue;
 	for (int n = 0; n < numOfQueues; n++)
 	{
 		queueList.push_back(newQueue);
 	}
 }
 
-void IOQueues::pushTask(Task* ioTask)
+void IOQueues::pushTask(std::shared_ptr<Task> ioTask)
 {
-	// get burst io location
-	if (queueList[burstIoLoc].empty())
+	int burstIoLoc = ioTask->getIoWaitLoc();
+	if (burstIoLoc >= 0)
 	{
-		// add end io event to ioTask
+		queueList[burstIoLoc].push_back(ioTask);
 	}
-	queueList[burstIoLoc].push_back(ioTask);
+	else
+	{
+		std::cerr << "ERROR!!  Current burst is not IO burst!!\n";
+	}
 }
 
-Task* IOQueues::endTaskGetNext(Task* endingIoTask)
+std::shared_ptr<Task> IOQueues::getNextTask(int burstIoLoc)
 {
-	// get burst io location
-	queueList[burstIoLoc].erase(queueList[burstIoLoc].begin());
-	return queueList[burstIoLoc][0];
+	// int burstIoLoc = endingIoTask->getIoWaitLoc();
+	if (!queueList[burstIoLoc].empty())
+	{
+		// queueList[burstIoLoc].erase(queueList[burstIoLoc].begin());
+		return queueList[burstIoLoc][0];	
+	}
+	return nullptr;
 }
 
+void IOQueues::finishTask(int burstIoLoc)
+{
+	queueList[burstIoLoc].erase(queueList[burstIoLoc].begin());
+}
+
+bool IOQueues::queueIsEmpty(int ioDevLoc)
+{
+	return queueList[ioDevLoc].empty();
+}

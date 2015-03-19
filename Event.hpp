@@ -11,11 +11,13 @@ private:
 	double execTime;
 	std::shared_ptr<Task> relatedTask;
 	bool endSession;
+	bool isIoEvent;
 public:
 	Event();
-	Event(std::shared_ptr<Task>, double, bool=false);
+	Event(std::shared_ptr<Task>, double, bool, bool=false);
 	bool willEndSession();
 	double getTime();
+	bool isIo();
 	std::shared_ptr<Task> getRelatedTask();
 	void operator=(Event);
 	bool operator>(Event) const;

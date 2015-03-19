@@ -17,7 +17,7 @@ private:
 	bool firstResponse;
 	bool isCompleted;
 public:
-	Task();
+	Task(int=1);
 	// Task(bool, bool, int=0);
 	int getBurstLoc();
 	bool isFirstResp();

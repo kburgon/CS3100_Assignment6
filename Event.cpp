@@ -7,19 +7,26 @@ Event::Event()
 	execTime = 0;
 	relatedTask = nullptr;
 	endSession = true;
+	isIoEvent = false;
 }
 
-Event::Event(std::shared_ptr<Task> taskToRelate, double newExecTime, bool setEndSession)
+Event::Event(std::shared_ptr<Task> taskToRelate, double newExecTime, bool setIfIo, bool setEndSession)
 {
 	// std::cout << "constructing event...\n";
 	relatedTask = taskToRelate;
 	execTime = newExecTime;
 	endSession = setEndSession;
+	isIoEvent = setIfIo;
 }
 
 bool Event::willEndSession()
 {
 	return endSession;
+}
+
+bool Event::isIo()
+{
+	return isIoEvent;
 }
 
 double Event::getTime()
@@ -37,6 +44,7 @@ void Event::operator=(Event evToAssign)
 	execTime = evToAssign.getTime();
 	endSession = evToAssign.willEndSession();
 	relatedTask = evToAssign.getRelatedTask();
+	isIoEvent = evToAssign.isIo();
 }
 
 bool Event::operator>(Event toCompare) const

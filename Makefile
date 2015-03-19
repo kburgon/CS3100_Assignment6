@@ -187,6 +187,30 @@ EventQueue.cpp.s:
 	$(MAKE) -f CMakeFiles/SchedulerSimulator.dir/build.make CMakeFiles/SchedulerSimulator.dir/EventQueue.cpp.s
 .PHONY : EventQueue.cpp.s
 
+IOQueues.o: IOQueues.cpp.o
+.PHONY : IOQueues.o
+
+# target to build an object file
+IOQueues.cpp.o:
+	$(MAKE) -f CMakeFiles/SchedulerSimulator.dir/build.make CMakeFiles/SchedulerSimulator.dir/IOQueues.cpp.o
+.PHONY : IOQueues.cpp.o
+
+IOQueues.i: IOQueues.cpp.i
+.PHONY : IOQueues.i
+
+# target to preprocess a source file
+IOQueues.cpp.i:
+	$(MAKE) -f CMakeFiles/SchedulerSimulator.dir/build.make CMakeFiles/SchedulerSimulator.dir/IOQueues.cpp.i
+.PHONY : IOQueues.cpp.i
+
+IOQueues.s: IOQueues.cpp.s
+.PHONY : IOQueues.s
+
+# target to generate assembly for a file
+IOQueues.cpp.s:
+	$(MAKE) -f CMakeFiles/SchedulerSimulator.dir/build.make CMakeFiles/SchedulerSimulator.dir/IOQueues.cpp.s
+.PHONY : IOQueues.cpp.s
+
 Processor.o: Processor.cpp.o
 .PHONY : Processor.o
 
@@ -325,6 +349,9 @@ help:
 	@echo "... EventQueue.o"
 	@echo "... EventQueue.i"
 	@echo "... EventQueue.s"
+	@echo "... IOQueues.o"
+	@echo "... IOQueues.i"
+	@echo "... IOQueues.s"
 	@echo "... Processor.o"
 	@echo "... Processor.i"
 	@echo "... Processor.s"

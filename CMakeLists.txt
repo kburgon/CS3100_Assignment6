@@ -16,6 +16,8 @@ set(Sources
 	Burst.cpp
 	ReadyQueue.hpp
 	ReadyQueue.cpp
+	IOQueues.hpp
+	IOQueues.cpp
 )
 
 set(CMAKE_CXX_FLAGS --std=c++11)

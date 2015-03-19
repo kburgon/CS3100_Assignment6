@@ -15,10 +15,16 @@ CMakeFiles/SchedulerSimulator.dir/EventQueue.cpp.o
  /home/kevin/Documents/CS3100/CS3100_Assignment6/EventQueue.cpp
  /home/kevin/Documents/CS3100/CS3100_Assignment6/EventQueue.hpp
  /home/kevin/Documents/CS3100/CS3100_Assignment6/Task.hpp
+CMakeFiles/SchedulerSimulator.dir/IOQueues.cpp.o
+ /home/kevin/Documents/CS3100/CS3100_Assignment6/Burst.hpp
+ /home/kevin/Documents/CS3100/CS3100_Assignment6/IOQueues.cpp
+ /home/kevin/Documents/CS3100/CS3100_Assignment6/IOQueues.hpp
+ /home/kevin/Documents/CS3100/CS3100_Assignment6/Task.hpp
 CMakeFiles/SchedulerSimulator.dir/Processor.cpp.o
  /home/kevin/Documents/CS3100/CS3100_Assignment6/Burst.hpp
  /home/kevin/Documents/CS3100/CS3100_Assignment6/Event.hpp
  /home/kevin/Documents/CS3100/CS3100_Assignment6/EventQueue.hpp
+ /home/kevin/Documents/CS3100/CS3100_Assignment6/IOQueues.hpp
  /home/kevin/Documents/CS3100/CS3100_Assignment6/Processor.cpp
  /home/kevin/Documents/CS3100/CS3100_Assignment6/Processor.hpp
  /home/kevin/Documents/CS3100/CS3100_Assignment6/ReadyQueue.hpp
@@ -33,6 +39,7 @@ CMakeFiles/SchedulerSimulator.dir/Scheduler.cpp.o
  /home/kevin/Documents/CS3100/CS3100_Assignment6/Burst.hpp
  /home/kevin/Documents/CS3100/CS3100_Assignment6/Event.hpp
  /home/kevin/Documents/CS3100/CS3100_Assignment6/EventQueue.hpp
+ /home/kevin/Documents/CS3100/CS3100_Assignment6/IOQueues.hpp
  /home/kevin/Documents/CS3100/CS3100_Assignment6/ReadyQueue.hpp
  /home/kevin/Documents/CS3100/CS3100_Assignment6/Scheduler.cpp
  /home/kevin/Documents/CS3100/CS3100_Assignment6/Scheduler.hpp
@@ -45,6 +52,7 @@ CMakeFiles/SchedulerSimulator.dir/main.cpp.o
  /home/kevin/Documents/CS3100/CS3100_Assignment6/Burst.hpp
  /home/kevin/Documents/CS3100/CS3100_Assignment6/Event.hpp
  /home/kevin/Documents/CS3100/CS3100_Assignment6/EventQueue.hpp
+ /home/kevin/Documents/CS3100/CS3100_Assignment6/IOQueues.hpp
  /home/kevin/Documents/CS3100/CS3100_Assignment6/Processor.hpp
  /home/kevin/Documents/CS3100/CS3100_Assignment6/ReadyQueue.hpp
  /home/kevin/Documents/CS3100/CS3100_Assignment6/Scheduler.hpp

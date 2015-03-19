@@ -1,15 +1,17 @@
 // Task pseudocode
 #include "Task.hpp"
 
-Task::Task()
+Task::Task(int ioDevCnt)
 {
-	// create burst vector
+	// create burst vector - ioDevCnt is for generating random io location
 	isIo = false;
 	Burst newBurst;
+	IoBurst newIoBurst;
 	numOfBursts = 0;
 	for (int n = 0; n < 5; n++)
 	{
-		bursts.push_back(newBurst);
+		// bursts.push_back(newBurst);
+		bursts.push_back(newIoBurst);
 		numOfBursts++;
 	}
 	// burst = newBurst;
@@ -64,7 +66,13 @@ bool Task::curBurstIo()
 
 int Task::getIoWaitLoc()
 {
-	// burst.location
+	std::cout << "The current burst location: " << curBurstLoc << std::endl;
+	if (bursts[curBurstLoc].isIo())
+	{
+		// std::cout << "This is an io burst.  Getting location...\n";
+		return bursts[curBurstLoc].getIoLocation();
+	}
+	return -1;
 }
 
 int Task::getBurstLoc()
@@ -106,3 +114,11 @@ bool Task::taskIsCompleted()
 {
 	return isCompleted;
 }
+
+// int Task::getIoBurstWaitLoc()
+// {
+// 	if (bursts[curBurstLoc].isIo())
+// 	{
+
+// 	}
+// }

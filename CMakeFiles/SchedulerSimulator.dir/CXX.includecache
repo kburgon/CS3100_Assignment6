@@ -44,6 +44,20 @@ queue
 iostream
 -
 
+/home/kevin/Documents/CS3100/CS3100_Assignment6/IOQueues.cpp
+IOQueues.hpp
+/home/kevin/Documents/CS3100/CS3100_Assignment6/IOQueues.hpp
+
+/home/kevin/Documents/CS3100/CS3100_Assignment6/IOQueues.hpp
+Task.hpp
+/home/kevin/Documents/CS3100/CS3100_Assignment6/Task.hpp
+memory
+-
+vector
+-
+iostream
+-
+
 /home/kevin/Documents/CS3100/CS3100_Assignment6/Processor.cpp
 Processor.hpp
 /home/kevin/Documents/CS3100/CS3100_Assignment6/Processor.hpp
@@ -89,6 +103,8 @@ Task.hpp
 /home/kevin/Documents/CS3100/CS3100_Assignment6/Task.hpp
 ReadyQueue.hpp
 /home/kevin/Documents/CS3100/CS3100_Assignment6/ReadyQueue.hpp
+IOQueues.hpp
+/home/kevin/Documents/CS3100/CS3100_Assignment6/IOQueues.hpp
 
 /home/kevin/Documents/CS3100/CS3100_Assignment6/Task.cpp
 Task.hpp

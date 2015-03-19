@@ -10,10 +10,12 @@ private:
 	double endTime;
 	double latency;
 	bool isIoBurst;
+	int waitLocation;
 public:
+	int getIoLocation();
 	void setIfIoStatus(bool);
-	Burst();
-	Burst(double, bool);
+	Burst(int=-1);
+	Burst(double, bool, int=-1);
 	bool isIo();
 	double getLatency();
 	double getEndTime();
@@ -25,16 +27,14 @@ public:
 class IoBurst:public Burst
 {
 private:
-	int waitLocation;
 public:
-	IoBurst(int newWaitLoc=0):Burst()
+	// int getIoLocation() override;
+	IoBurst(int newWaitLoc=0):Burst(newWaitLoc)
 	{
-		waitLocation = newWaitLoc;
+		// waitLocation = newWaitLoc;
 		// isIoBurst = true;
 		setIfIoStatus(true);
 	}
-
-	int getIoLocation();
 };
 
 #endif

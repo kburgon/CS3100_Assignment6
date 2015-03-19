@@ -6,6 +6,7 @@
 #include "EventQueue.hpp"
 #include "Task.hpp"
 #include "ReadyQueue.hpp"
+#include "IOQueues.hpp"
 
 class Scheduler
 {
@@ -19,7 +20,10 @@ private:
 	int numOfIoDevs;
 	EventQueue eQueue;
 	ReadyQueue rQueue;
+	IOQueues ioDevQueue;
 	void createTasks(int);
+	void execIO(std::shared_ptr<Task>);
+	void handleIoEvent(std::shared_ptr<Task>);
 public:
 	Scheduler();
 	void setNumCpus(int numToSet);

@@ -1,27 +1,38 @@
 // two classes: Burst and IoBurst
 #include "Burst.hpp"
 
-Burst::Burst()
+Burst::Burst(int newWaitLoc)
 {
 	bTime = 5;
 	endTime = 0;
 	isIoBurst = false;
 	latency = 0;
+	waitLocation = newWaitLoc;
 }
 
-Burst::Burst(double newBTime, bool setIo)
+int Burst::getIoLocation()
+{
+	return waitLocation;
+}
+
+Burst::Burst(double newBTime, bool setIo, int newWaitLoc)
 {
 	endTime = 0;
 	isIoBurst = setIo;
 	bTime = newBTime;
+	latency = 0;
+	waitLocation = newWaitLoc;
 }
 
 bool Burst::isIo()
 {
-	if (isIoBurst == false) 
+	if (!isIoBurst) 
+	{
+		// std::cout << "This is a cpu burst\n";
 		return false;
-	else 
-		return true;
+	}
+	// std::cout << "This is an io burst\n";
+	return true;
 }
 
 void Burst::endBurst(int endTime)
@@ -58,7 +69,7 @@ void Burst::operator=(Burst toAssign)
 
 // child class IoBurst
 
-int IoBurst::getIoLocation()
-{
-	return waitLocation;
-}
+// int IoBurst::getIoLocation()
+// {
+// 	return waitLocation;
+// }
