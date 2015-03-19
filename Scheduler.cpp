@@ -6,7 +6,7 @@ Scheduler::Scheduler()
 	cpuVsIo = 1;
 	taskCreateFreq = 1;
 	cntxtSwitchCost = 1;
-	numOfIoDevs = 1;
+	numOfIoDevs = 3;
 	curTime = 0;
 }
 
@@ -37,10 +37,10 @@ void Scheduler::setNumIoDevices(int numDevices)
 
 void Scheduler::init()
 {
-	std::cout << "Started init phase..\n";
+	// std::cout << "Started init phase..\n";
 	ioDevQueue.createQueues(numOfIoDevs);
-	std::shared_ptr<Task> initTask = std::make_shared<Task>();
-	std::shared_ptr<Task> endTask = std::make_shared<Task>();
+	std::shared_ptr<Task> initTask = std::make_shared<Task>(numOfIoDevs);
+	std::shared_ptr<Task> endTask = std::make_shared<Task>(numOfIoDevs);
 	Event firstEvent(initTask, 0, false);
 	Event lastEvent(endTask, 100, false, true);
 	eQueue.addEvent(firstEvent);
@@ -55,7 +55,7 @@ void Scheduler::createTasks(int numOfTasks)
 	double newTaskExecTime;
 	for (int n = 0; n < numOfTasks; n++)
 	{
-		taskToAdd = std::make_shared<Task>();
+		taskToAdd = std::make_shared<Task>(numOfIoDevs);
 		newTaskExecTime = curTime + taskToAdd->getBurstTime();
 		eventToAdd = Event(taskToAdd, newTaskExecTime, false);
 		eQueue.addEvent(eventToAdd);
@@ -146,6 +146,7 @@ void Scheduler::runSession()
 			}
 			else
 			{
+				std::cout << "This has been recognized as a cpu burst...\n";
 				if (numCpus > 0)
 				{
 					execTask(curTask);

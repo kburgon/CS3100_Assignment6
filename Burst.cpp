@@ -60,6 +60,11 @@ double Burst::getBurstTime()
 	return bTime;
 }
 
+void Burst::setDevLoc(int newLoc)
+{
+	waitLocation = newLoc;
+}
+
 void Burst::operator=(Burst toAssign)
 {
 	latency = toAssign.getLatency();

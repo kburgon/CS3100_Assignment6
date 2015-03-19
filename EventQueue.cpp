@@ -24,7 +24,7 @@ Event EventQueue::pullEvent()
 
 EventQueue::EventQueue()
 {
-	std::cout << "Constructing Event Queue...\n";
+	// std::cout << "Constructing Event Queue...\n";
 	// context switch cost = 0.5
 	// set priority queue
 }

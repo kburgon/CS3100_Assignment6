@@ -8,10 +8,25 @@ Task::Task(int ioDevCnt)
 	Burst newBurst;
 	IoBurst newIoBurst;
 	numOfBursts = 0;
-	for (int n = 0; n < 5; n++)
+	int ioDevNum = 0;
+	for (int n = 0; n < 10; n++)
 	{
-		// bursts.push_back(newBurst);
-		bursts.push_back(newIoBurst);
+		if (isIo)
+		{
+			newIoBurst.setDevLoc(ioDevNum);
+			bursts.push_back(newIoBurst);
+			isIo = false;
+			ioDevNum++;
+			if (ioDevNum == ioDevCnt)
+			{
+				ioDevNum = 0;
+			}
+		}
+		else
+		{
+			bursts.push_back(newBurst);
+			isIo = true;
+		}
 		numOfBursts++;
 	}
 	// burst = newBurst;
@@ -19,13 +34,6 @@ Task::Task(int ioDevCnt)
 	firstResponse = true;
 	isCompleted = false;
 	std::cout << "Constructing task...\n";
-	// generate random int
-	// for (int n = 0; n < randomInt; n++)
-	// {
-	// 	// if setIo == false create burst()
-	// 	// if setIo == true create burst(waitSpot)
-	// 	// add to burstVector
-	// }
 }
 
 // Task::Task(bool isEndSession, bool setIsIo, int waitSpot);
@@ -66,7 +74,7 @@ bool Task::curBurstIo()
 
 int Task::getIoWaitLoc()
 {
-	std::cout << "The current burst location: " << curBurstLoc << std::endl;
+	// std::cout << "The current burst location: " << curBurstLoc << std::endl;
 	if (bursts[curBurstLoc].isIo())
 	{
 		// std::cout << "This is an io burst.  Getting location...\n";

@@ -21,6 +21,7 @@ public:
 	double getEndTime();
 	double getBurstTime();
 	void endBurst(int);
+	void setDevLoc(int);
 	void operator=(Burst);
 };
 
