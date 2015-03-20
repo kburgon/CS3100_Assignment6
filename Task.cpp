@@ -13,7 +13,8 @@ Task::Task(int ioDevCnt)
 	{
 		if (isIo)
 		{
-			newIoBurst.setDevLoc(ioDevNum);
+			newIoBurst.setDevLoc(newIoBurst.getRandomIoLoc(ioDevCnt));
+			// newIoBurst.setDevLoc(ioDevNum);
 			bursts.push_back(newIoBurst);
 			isIo = false;
 			ioDevNum++;

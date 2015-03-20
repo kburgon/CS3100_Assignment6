@@ -3,7 +3,7 @@
 
 Burst::Burst(int newWaitLoc)
 {
-	bTime = 5;
+	bTime = getRandomTime();
 	endTime = 0;
 	isIoBurst = false;
 	latency = 0;
@@ -70,6 +70,24 @@ void Burst::operator=(Burst toAssign)
 	latency = toAssign.getLatency();
 	endTime = toAssign.getEndTime();
 	bTime = toAssign.getBurstTime();
+}
+
+double Burst::getRandomTime()
+{
+	std::random_device rdm;
+	std::mt19937 mt(rdm());
+	std::normal_distribution<> norm(10, 3.5);
+	double normalNum = norm(mt);
+	return normalNum;
+}
+
+int Burst::getRandomIoLoc(int numOfDevs)
+{
+	std::random_device rdm;
+	std::mt19937 mt(rdm());
+	std::uniform_int_distribution<> devLocGen(0, numOfDevs - 1);
+	int randDevLoc = devLocGen(mt);
+	return randDevLoc;
 }
 
 // child class IoBurst

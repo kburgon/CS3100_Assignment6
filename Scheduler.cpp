@@ -42,7 +42,7 @@ void Scheduler::init()
 	std::shared_ptr<Task> initTask = std::make_shared<Task>(numOfIoDevs);
 	std::shared_ptr<Task> endTask = std::make_shared<Task>(numOfIoDevs);
 	Event firstEvent(initTask, 0, false);
-	Event lastEvent(endTask, 100, false, true);
+	Event lastEvent(endTask, 1000, false, true);
 	eQueue.addEvent(firstEvent);
 	eQueue.addEvent(lastEvent);
 	runSession();

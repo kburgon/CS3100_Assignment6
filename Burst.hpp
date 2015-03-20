@@ -2,6 +2,7 @@
 #define BURST_HPP
 
 #include <iostream>
+#include <random>
 
 class Burst
 {
@@ -23,6 +24,8 @@ public:
 	void endBurst(int);
 	void setDevLoc(int);
 	void operator=(Burst);
+	double getRandomTime();
+	int getRandomIoLoc(int);
 };
 
 class IoBurst:public Burst
