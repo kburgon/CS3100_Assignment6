@@ -2,9 +2,9 @@
 
 Scheduler::Scheduler()
 {
-	numCpus = 1;
+	numCpus = 4;
 	cpuVsIo = 1;
-	taskCreateFreq = 1;
+	taskCreateFreq = 5;
 	cntxtSwitchCost = 1;
 	numOfIoDevs = 3;
 	curTime = 0;
@@ -56,30 +56,11 @@ void Scheduler::createTasks(int numOfTasks)
 	for (int n = 0; n < numOfTasks; n++)
 	{
 		taskToAdd = std::make_shared<Task>(numOfIoDevs);
-		newTaskExecTime = curTime + taskToAdd->getBurstTime();
-		eventToAdd = Event(taskToAdd, newTaskExecTime, false);
-		eQueue.addEvent(eventToAdd);
+		execTask(taskToAdd);
+		// newTaskExecTime = curTime + taskToAdd->getBurstTime();
+		// eventToAdd = Event(taskToAdd, newTaskExecTime, false);
+		// eQueue.addEvent(eventToAdd);
 	}
-}
-
-void Scheduler::execTask(std::shared_ptr<Task> exTask)
-{
-	// std::cout << "Executing task...\n";
-	exTask->endBurst(curTime);
-	double timeToEvent = cntxtSwitchCost + exTask->getBurstTime();
-	if (!exTask->taskIsCompleted())
-	{
-		// check if io task or not, act accordingly
-		double nextEventTime = curTime + timeToEvent;
-		Event nextEvent(exTask, nextEventTime, false);
-		eQueue.addEvent(nextEvent);
-	}
-	else
-	{
-		std::cout << "The task has finished.\n";
-	}
-	// numCpus--;
-	
 }
 
 void Scheduler::handleIoEvent(std::shared_ptr<Task> eventTask)
@@ -96,17 +77,72 @@ void Scheduler::handleIoEvent(std::shared_ptr<Task> eventTask)
 	}
 }
 
+void Scheduler::handleCpuEvent(std::shared_ptr<Task> eventTask)
+{
+	eventTask->endBurst(curTime);
+	std::shared_ptr<Task> toEx;
+	Event eToEx;
+	numCpus++;
+	double newEventTime;
+	std::cout << "----------------about to fill remaining resources-----------------\n";
+	if (rQueue.isEmpty()) std::cout << "	rQueue is empty\n";
+	else std::cout << "	rQueue as items in it\n";
+	while (!rQueue.isEmpty() && numCpus > 0)
+	{
+		std::cout << "\n\nFilling cpus...\n\n";
+		toEx = rQueue.pullTask();
+		newEventTime = curTime + cntxtSwitchCost + eventTask->getBurstTime();
+		eToEx = Event(toEx, newEventTime, false);
+		numCpus--;
+	}
+	// std::cout << "Number of cpus avaiable: " << numCpus << std::endl;
+}
+
 void Scheduler::execIO(std::shared_ptr<Task> execTask)
 {
-	int ioDevLoc = execTask->getIoWaitLoc();
-	std::cout << "Wait location: " << ioDevLoc << std::endl;
-	if (ioDevQueue.queueIsEmpty(ioDevLoc))
+	if (!execTask->taskIsCompleted())
 	{
-		double eventTime = curTime + execTask->getBurstTime();
-		Event newEvent(execTask, eventTime, true);
-		eQueue.addEvent(newEvent);
+		int ioDevLoc = execTask->getIoWaitLoc();
+		std::cout << "Wait location: " << ioDevLoc << std::endl;
+		if (ioDevQueue.queueIsEmpty(ioDevLoc))
+		{
+			double eventTime = curTime + execTask->getBurstTime();
+			Event newEvent(execTask, eventTime, true);
+			eQueue.addEvent(newEvent);
+		}
+		ioDevQueue.pushTask(execTask);
 	}
-	ioDevQueue.pushTask(execTask);
+	else
+	{
+		std::cout << "Task was finished.\n";
+	}
+}
+
+void Scheduler::execTask(std::shared_ptr<Task> exTask)
+{
+	// std::cout << "Executing task...\n";
+	// exTask->endBurst(curTime);
+	if (!exTask->taskIsCompleted())
+	{
+		std::cout << "Number of cpus avaiable: " << numCpus << std::endl;
+		rQueue.pushTask(exTask);
+		if (numCpus > 0)
+		{
+			std::cout << "There are " << numCpus << " cpus left. Filling...\n";
+			std::shared_ptr<Task> toExec = rQueue.pullTask();
+			double timeToEvent = cntxtSwitchCost + toExec->getBurstTime();
+			double nextEventTime = curTime + timeToEvent;
+			Event nextEvent(exTask, nextEventTime, false);
+			eQueue.addEvent(nextEvent);
+			numCpus--;
+		}
+	}
+	else
+	{
+		std::cout << "The task has finished.\n";
+	}
+	// numCpus--;
+	
 }
 
 void Scheduler::runSession()
@@ -119,6 +155,7 @@ void Scheduler::runSession()
 	double timeFromLastE;
 	while (!endOfSession)
 	{
+		std::cout << "\n\n************************************NEW EVENT*******************************\n";
 		// std::cout << "Starting loop again...\n";
 		curEvent = eQueue.pullEvent();
 		curTime = curEvent.getTime();
@@ -131,13 +168,21 @@ void Scheduler::runSession()
 		else
 		{
 			curTask = curEvent.getRelatedTask();
+			if (curTask->curBurstIo()) std::cout << "This is an IO task\n";
+			else std::cout << "This is a CPU task\n";
 			if (curEvent.isIo())
 			{
+				std::cout << "This is an IO event\n";
 				handleIoEvent(curTask);
+			}
+			else
+			{
+				std::cout << "This is a CPU event\n";
+				handleCpuEvent(curTask);
 			}
 			std::cout << "Not ending session yet!  Time: " << curEvent.getTime() << "\n";
 			int tasksToCreate = timeFromLastE / taskCreateFreq;
-			std::cout << "Amount of tasks that will be created: " << tasksToCreate << std::endl;
+			// std::cout << "Amount of tasks that will be created: " << tasksToCreate << std::endl;
 			createTasks(tasksToCreate);
 			if (curTask->curBurstIo())
 			{
@@ -147,14 +192,7 @@ void Scheduler::runSession()
 			else
 			{
 				std::cout << "This has been recognized as a cpu burst...\n";
-				if (numCpus > 0)
-				{
-					execTask(curTask);
-				}
-				else
-				{
-					rQueue.pushTask(curTask);
-				}
+				execTask(curTask);
 			}
 			lastEventTime = curTime;
 		}

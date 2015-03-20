@@ -14,6 +14,8 @@ public:
 	ReadyQueue();
 	void pushTask(std::shared_ptr<Task> curTask);
 	std::shared_ptr<Task> pullTask();
+	bool isEmpty();
+	void printQueue();
 };
 
 #endif

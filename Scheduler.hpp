@@ -24,6 +24,7 @@ private:
 	void createTasks(int);
 	void execIO(std::shared_ptr<Task>);
 	void handleIoEvent(std::shared_ptr<Task>);
+	void handleCpuEvent(std::shared_ptr<Task>);
 public:
 	Scheduler();
 	void setNumCpus(int numToSet);

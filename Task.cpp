@@ -33,7 +33,7 @@ Task::Task(int ioDevCnt)
 	curBurstLoc = 0;
 	firstResponse = true;
 	isCompleted = false;
-	std::cout << "Constructing task...\n";
+	// std::cout << "Constructing task...\n";
 }
 
 // Task::Task(bool isEndSession, bool setIsIo, int waitSpot);
@@ -56,9 +56,14 @@ void Task::endBurst(int endTime)
 		firstResponse = false;
 		// set firstResponse time to curTime
 	}
-	// bursts[curBurstLoc].endBurst(endTime);
-	burst.endBurst(endTime);
+	// if (bursts[curBurstLoc].isIo()) std::cout << "EndBurst: This is io\n";
+	// else std::cout << "EndBurst: This is cpu\n";
+	bursts[curBurstLoc].endBurst(endTime);
+	// burst.endBurst(endTime);
 	curBurstLoc++;
+	// if (bursts[curBurstLoc].isIo()) std::cout << "EndBurst: This is io\n";
+	// else std::cout << "EndBurst: This is cpu\n";
+	
 	if (curBurstLoc == numOfBursts)
 	{
 		std::cout << "Shutting down task...\n";
