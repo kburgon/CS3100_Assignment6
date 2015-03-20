@@ -11,7 +11,7 @@
 class Processor
 {
 private:
-	// Scheduler mainScheduler;
+	Scheduler mainScheduler;
 public:
 	Processor();
 	void startShell();

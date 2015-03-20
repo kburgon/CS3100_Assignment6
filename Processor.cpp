@@ -9,11 +9,7 @@ void Processor::showHelpText()
 {
 	std::cout << "  List of commands and explanation:" << std::endl
 		<< "	exit - exit the application" << std::endl
-		<< "	set cpunum [value] - sets the number of CPUs" << std::endl
-		<< "	set iobinding [value] - sets percentage of IO bound vs. CPU bound\n"
-		<< "	set taskcreatefreq [value] - sets the frequency of task creations (in time)\n"
-		<< "	set cswitchtime [value] - sets the context switch time of the simulator\n"
-		<< "	set iodevicenum [value] - sets the number of io devices in the simulator\n"
+		<< "	setvars - set the user-defined variables\n"
 		<< "	run - run the scheduler\n";
 }
 
@@ -38,39 +34,38 @@ void Processor::startShell()
 		{
 			willExit = true;
 		}
-		else if (cmd == "set")
+		else if (cmd == "setvars")
 		{
-			std::cin >> cmd;
-			
-			if (cmd == "cpunum")
-			{
-				std::cin >> setFloat;
-				std::cout << "Setting number of CPUs to " << setInt << std::endl;
-			}
-			else if (cmd == "iobinding")
-			{
-				std::cin >> setFloat;
-				std::cout << "Setting tasks to " << setInt << "\% IO bound." << std::endl;
-			}
-			else if (cmd == "taskcreatefreq")
-			{
-				std::cin >> setFloat;
-				std::cout << "Task create frequency set to " << setFloat << ".\n";
-			}
-			else if (cmd == "cswitchtime")
-			{
-				std::cin >> setFloat;
-				std::cout << "Context switch time set to " << setFloat << ".\n";
-			}
-			else
-			{
-				std::cin >> setFloat;
-				std::cout << "Number of IO devices set to " << setInt << ",\n";
-			}
+			std::cout << "Setting the variables.\nNumber of CPUs: ";
+			std::cin >> setInt;
+			std::cout << "Setting CPUs to " << setInt << std::endl;
+			mainScheduler.setNumCpus(setInt);
+			// run setter for scheduler
+			std::cout << "Number of IO devices: ";
+			std::cin >> setInt;
+			std::cout << "Setting IO devices to " << setInt << std::endl;
+			mainScheduler.setNumIoDevices(setInt);
+			// run setter for IO devices
+			std::cout << "Cost of context switch: ";
+			std::cin >> setFloat;
+			std::cout << "Setting context switch to " << setFloat << std::endl;
+			mainScheduler.setCntxtSwitchCost(setFloat);
+			// run setter for context switch cost
+			std::cout << "Percent CPU vs. IO bound: %";
+			std::cin >> setFloat;
+			std::cout << "Setting percentage to %" << setFloat << std::endl;
+			mainScheduler.setPercentCpuIo(setFloat);
+			// run setter for CPU vs. IO percentage
+			std::cout << "Task creation frequency (every _ units of time): ";
+			std::cin >> setFloat;
+			std::cout << "Setting creation frequency to " << setFloat << std::endl;
+			mainScheduler.setTaskCreateFreq(setFloat);
+			// run setter for task create frequency
+			std::cout << "Variables set.\n";
 		}
 		else if (cmd == "run")
 		{
-			Scheduler mainScheduler;
+			// Scheduler mainScheduler;
 			mainScheduler.init();
 		}
 		else
