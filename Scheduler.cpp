@@ -75,6 +75,7 @@ void Scheduler::handleIoEvent(std::shared_ptr<Task> eventTask)
 		Event newEvent(newEventTask, eventTime, true);
 		eQueue.addEvent(newEvent);
 	}
+	else std::cout << "<<<<<<<<<<<<The queue is empty!>>>>>>>>>>>>\n";
 }
 
 void Scheduler::handleCpuEvent(std::shared_ptr<Task> eventTask)
@@ -85,15 +86,18 @@ void Scheduler::handleCpuEvent(std::shared_ptr<Task> eventTask)
 	numCpus++;
 	double newEventTime;
 	std::cout << "----------------about to fill remaining resources-----------------\n";
-	if (rQueue.isEmpty()) std::cout << "	rQueue is empty\n";
-	else std::cout << "	rQueue as items in it\n";
+	// if (rQueue.isEmpty()) std::cout << "	rQueue is empty\n";
+	// else std::cout << "	rQueue as items in it\n";
 	while (!rQueue.isEmpty() && numCpus > 0)
 	{
+		std::cout << "Number of cpus avaiable: " << numCpus << std::endl;
 		std::cout << "\n\nFilling cpus...\n\n";
 		toEx = rQueue.pullTask();
 		newEventTime = curTime + cntxtSwitchCost + eventTask->getBurstTime();
 		eToEx = Event(toEx, newEventTime, false);
+		eQueue.addEvent(eToEx);
 		numCpus--;
+		// std::cout << "There are now " << numCpus << " CPUs\n";
 	}
 	// std::cout << "Number of cpus avaiable: " << numCpus << std::endl;
 }

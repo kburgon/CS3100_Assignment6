@@ -22,6 +22,7 @@ std::shared_ptr<Task> ReadyQueue::pullTask()
 
 bool ReadyQueue::isEmpty()
 {
+	std::cout << "Number of tasks in readyQueue: " << readyList.size() << std::endl;
 	// printQueue();
 	if (readyList.empty())
 		return true;

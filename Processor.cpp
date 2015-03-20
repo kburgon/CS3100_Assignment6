@@ -51,9 +51,9 @@ void Processor::startShell()
 			std::cout << "Setting context switch to " << setFloat << std::endl;
 			mainScheduler.setCntxtSwitchCost(setFloat);
 			// run setter for context switch cost
-			std::cout << "Percent CPU vs. IO bound: %";
+			std::cout << "Percent CPU vs. IO bound: ";
 			std::cin >> setFloat;
-			std::cout << "Setting percentage to %" << setFloat << std::endl;
+			std::cout << "Setting percentage to " << setFloat << std::endl;
 			mainScheduler.setPercentCpuIo(setFloat);
 			// run setter for CPU vs. IO percentage
 			std::cout << "Task creation frequency (every _ units of time): ";
@@ -65,7 +65,6 @@ void Processor::startShell()
 		}
 		else if (cmd == "run")
 		{
-			// Scheduler mainScheduler;
 			mainScheduler.init();
 		}
 		else
