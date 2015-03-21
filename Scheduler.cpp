@@ -3,7 +3,7 @@
 Scheduler::Scheduler()
 {
 	numCpus = 4;
-	cpuVsIo = 1;
+	cpuVsIo = 50;
 	taskCreateFreq = 5;
 	cntxtSwitchCost = 1;
 	numOfIoDevs = 3;
@@ -37,15 +37,22 @@ void Scheduler::setNumIoDevices(int numDevices)
 
 void Scheduler::init()
 {
-	// std::cout << "Started init phase..\n";
+	createTaskBinding();
 	ioDevQueue.createQueues(numOfIoDevs);
-	std::shared_ptr<Task> initTask = std::make_shared<Task>(numOfIoDevs);
-	std::shared_ptr<Task> endTask = std::make_shared<Task>(numOfIoDevs);
+	std::shared_ptr<Task> initTask = std::make_shared<Task>(numOfIoDevs, cpuBinding, ioBinding);
+	std::shared_ptr<Task> endTask = std::make_shared<Task>(numOfIoDevs, cpuBinding, ioBinding);
 	Event firstEvent(initTask, 0, false);
-	Event lastEvent(endTask, 1000, false, true);
+	Event lastEvent(endTask, 100, false, true);
 	eQueue.addEvent(firstEvent);
 	eQueue.addEvent(lastEvent);
 	runSession();
+}
+
+void Scheduler::createTaskBinding()
+{
+	double multiplier = cpuVsIo * 0.02;
+	cpuBinding = multiplier;
+	ioBinding = 2 - multiplier;
 }
 
 void Scheduler::createTasks(int numOfTasks)
@@ -55,11 +62,8 @@ void Scheduler::createTasks(int numOfTasks)
 	double newTaskExecTime;
 	for (int n = 0; n < numOfTasks; n++)
 	{
-		taskToAdd = std::make_shared<Task>(numOfIoDevs);
+		taskToAdd = std::make_shared<Task>(numOfIoDevs, cpuBinding, ioBinding);
 		execTask(taskToAdd);
-		// newTaskExecTime = curTime + taskToAdd->getBurstTime();
-		// eventToAdd = Event(taskToAdd, newTaskExecTime, false);
-		// eQueue.addEvent(eventToAdd);
 	}
 }
 
@@ -85,7 +89,7 @@ void Scheduler::handleCpuEvent(std::shared_ptr<Task> eventTask)
 	Event eToEx;
 	numCpus++;
 	double newEventTime;
-	std::cout << "----------------about to fill remaining resources-----------------\n";
+	// std::cout << "----------------about to fill remaining resources-----------------\n";
 	// if (rQueue.isEmpty()) std::cout << "	rQueue is empty\n";
 	// else std::cout << "	rQueue as items in it\n";
 	while (!rQueue.isEmpty() && numCpus > 0)
@@ -155,15 +159,16 @@ void Scheduler::runSession()
 	bool endOfSession = false;
 	Event curEvent;
 	std::shared_ptr<Task> curTask;
-	double lastEventTime = 0;
-	double timeFromLastE;
+	// double lastEventTime = 0;
+	// double timeFromLastE;
+	double lastTaskCreateTime = 0;
 	while (!endOfSession)
 	{
 		std::cout << "\n\n************************************NEW EVENT*******************************\n";
 		// std::cout << "Starting loop again...\n";
 		curEvent = eQueue.pullEvent();
 		curTime = curEvent.getTime();
-		timeFromLastE = curTime - lastEventTime;
+		// timeFromLastE = curTime - lastEventTime;
 		if (curEvent.willEndSession())
 		{
 			endOfSession = true;
@@ -172,8 +177,8 @@ void Scheduler::runSession()
 		else
 		{
 			curTask = curEvent.getRelatedTask();
-			if (curTask->curBurstIo()) std::cout << "This is an IO task\n";
-			else std::cout << "This is a CPU task\n";
+			// if (curTask->curBurstIo()) std::cout << "This is an IO task\n";
+			// else std::cout << "This is a CPU task\n";
 			if (curEvent.isIo())
 			{
 				std::cout << "This is an IO event\n";
@@ -185,20 +190,26 @@ void Scheduler::runSession()
 				handleCpuEvent(curTask);
 			}
 			std::cout << "Not ending session yet!  Time: " << curEvent.getTime() << "\n";
-			int tasksToCreate = timeFromLastE / taskCreateFreq;
-			// std::cout << "Amount of tasks that will be created: " << tasksToCreate << std::endl;
-			createTasks(tasksToCreate);
-			if (curTask->curBurstIo())
+			if (!curTask->taskIsCompleted())
 			{
-				std::cout << "This has been recognized as an io burst...\n";
-				execIO(curTask);
+				if (curTime > (lastTaskCreateTime + taskCreateFreq))
+				{
+					lastTaskCreateTime = curTime;
+					createTasks(1);
+				}
+				if (curTask->curBurstIo())
+				{
+					std::cout << "This has been recognized as an io burst...\n";
+					execIO(curTask);
+				}
+				else
+				{
+					std::cout << "This has been recognized as a cpu burst...\n";
+					execTask(curTask);
+				}
 			}
-			else
-			{
-				std::cout << "This has been recognized as a cpu burst...\n";
-				execTask(curTask);
-			}
-			lastEventTime = curTime;
+			
+			// lastEventTime = curTime;
 		}
 		// std::cout << "How about now?\n";
 	}

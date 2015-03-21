@@ -16,8 +16,10 @@ private:
 	int numOfBursts;
 	bool firstResponse;
 	bool isCompleted;
+	double getRandomFloat();
+	int getRandomInt(int);
 public:
-	Task(int=1);
+	Task(int, double, double);
 	// Task(bool, bool, int=0);
 	int getBurstLoc();
 	bool isFirstResp();

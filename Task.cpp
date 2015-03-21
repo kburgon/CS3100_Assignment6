@@ -1,40 +1,36 @@
 // Task pseudocode
 #include "Task.hpp"
 
-Task::Task(int ioDevCnt)
+Task::Task(int ioDevCnt, double cpuMultiplier, double ioMultiplier)
 {
-	// create burst vector - ioDevCnt is for generating random io location
+	double ioTimeSet, cpuTimeSet;
 	isIo = false;
 	Burst newBurst;
 	IoBurst newIoBurst;
 	numOfBursts = 0;
-	int ioDevNum = 0;
 	for (int n = 0; n < 10; n++)
 	{
 		if (isIo)
 		{
-			newIoBurst.setDevLoc(newIoBurst.getRandomIoLoc(ioDevCnt));
-			// newIoBurst.setDevLoc(ioDevNum);
+			ioTimeSet = ioMultiplier * getRandomFloat();
+			std::cout << "IO BINDING: The multiplier is at " << ioMultiplier << " and the new time is " << ioTimeSet << std::endl;
+			newIoBurst = IoBurst(ioMultiplier, getRandomInt(ioDevCnt));
 			bursts.push_back(newIoBurst);
 			isIo = false;
-			ioDevNum++;
-			if (ioDevNum == ioDevCnt)
-			{
-				ioDevNum = 0;
-			}
 		}
 		else
 		{
+			cpuTimeSet = cpuMultiplier * getRandomFloat();
+			std::cout << "CPU BINDING: The multiplier is at " << ioMultiplier << " and the new time is " << cpuTimeSet << std::endl;
+			newBurst = Burst(cpuTimeSet);
 			bursts.push_back(newBurst);
 			isIo = true;
 		}
 		numOfBursts++;
 	}
-	// burst = newBurst;
 	curBurstLoc = 0;
 	firstResponse = true;
 	isCompleted = false;
-	// std::cout << "Constructing task...\n";
 }
 
 // Task::Task(bool isEndSession, bool setIsIo, int waitSpot);
@@ -112,6 +108,7 @@ double Task::getBurstTime()
 
 void Task::operator=(Task toAssign)
 {
+	std::cout << "WARNING!!	 Using Task's assignment operator.  This should be updated.\n";
 	isIo = curBurstIo();
 	// burst = toAssign.getBurst();
 	bursts = toAssign.assignBursts();
@@ -129,10 +126,20 @@ bool Task::taskIsCompleted()
 	return isCompleted;
 }
 
-// int Task::getIoBurstWaitLoc()
-// {
-// 	if (bursts[curBurstLoc].isIo())
-// 	{
+double Task::getRandomFloat()
+{
+	std::random_device rdm;
+	std::mt19937 mt(rdm());
+	std::normal_distribution<> norm(10, 3.5);
+	double normalNum = norm(mt);
+	return normalNum;
+}
 
-// 	}
-// }
+int Task::getRandomInt(int upperNum)
+{
+	std::random_device rdm;
+	std::mt19937 mt(rdm());
+	std::uniform_int_distribution<> devLocGen(0, upperNum - 1);
+	int randNum = devLocGen(mt);
+	return randNum;
+}

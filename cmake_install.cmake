@@ -38,7 +38,7 @@ else()
   set(CMAKE_INSTALL_MANIFEST "install_manifest.txt")
 endif()
 
-file(WRITE "/home/kevin/Documents/CS3100/CS3100_Assignment6/${CMAKE_INSTALL_MANIFEST}" "")
-foreach(file ${CMAKE_INSTALL_MANIFEST_FILES})
-  file(APPEND "/home/kevin/Documents/CS3100/CS3100_Assignment6/${CMAKE_INSTALL_MANIFEST}" "${file}\n")
-endforeach()
+string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
+       "${CMAKE_INSTALL_MANIFEST_FILES}")
+file(WRITE "/home/kevin/Documents/CS3100/CS3100_Assignment6/${CMAKE_INSTALL_MANIFEST}"
+     "${CMAKE_INSTALL_MANIFEST_CONTENT}")

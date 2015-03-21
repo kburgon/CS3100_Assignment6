@@ -11,16 +11,19 @@
 class Scheduler
 {
 private:
-	// std::vector<Task*> tasks;
+	std::vector<Task*> finishedTasks;
 	double curTime;
 	int numCpus;
 	double cpuVsIo;
+	double cpuBinding;
+	double ioBinding;
 	double taskCreateFreq;
 	double cntxtSwitchCost;
 	int numOfIoDevs;
 	EventQueue eQueue;
 	ReadyQueue rQueue;
 	IOQueues ioDevQueue;
+	void createTaskBinding();
 	void createTasks(int);
 	void execIO(std::shared_ptr<Task>);
 	void handleIoEvent(std::shared_ptr<Task>);

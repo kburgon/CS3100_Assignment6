@@ -16,7 +16,7 @@ public:
 	int getIoLocation();
 	void setIfIoStatus(bool);
 	Burst(int=-1);
-	Burst(double, bool, int=-1);
+	Burst(double, int=-1);
 	bool isIo();
 	double getLatency();
 	double getEndTime();
@@ -24,21 +24,25 @@ public:
 	void endBurst(int);
 	void setDevLoc(int);
 	void operator=(Burst);
-	double getRandomTime();
-	int getRandomIoLoc(int);
+	void setLatency(double);
+	void setBurstTime(double);
+	void setEndTime(double);
+	void setIoLoc(int);
 };
 
 class IoBurst:public Burst
 {
 private:
 public:
-	// int getIoLocation() override;
 	IoBurst(int newWaitLoc=0):Burst(newWaitLoc)
 	{
-		// waitLocation = newWaitLoc;
-		// isIoBurst = true;
 		setIfIoStatus(true);
 	}
+	IoBurst(double newTime, int newWaitLoc=0):Burst(newTime, newWaitLoc)
+	{
+		setIfIoStatus(true);
+	}
+	void operator=(IoBurst);
 };
 
 #endif
