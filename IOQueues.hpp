@@ -17,6 +17,7 @@ public:
 	std::shared_ptr<Task> getNextTask(int);
 	void finishTask(int);
 	bool queueIsEmpty(int);
+	double getIoUtilization();
 };
 
 #endif

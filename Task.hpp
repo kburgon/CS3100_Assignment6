@@ -11,26 +11,31 @@ private:
 	bool isIo;
 	// int randomInt;
 	std::vector<Burst> bursts;
-	Burst burst;
+	// Burst burst;
+	double createTime;
+	double latency;
 	int curBurstLoc;
 	int numOfBursts;
 	bool firstResponse;
+	double firstResponseTime;
 	bool isCompleted;
 	double getRandomFloat();
 	int getRandomInt(int);
 public:
 	Task(int, double, double);
-	// Task(bool, bool, int=0);
 	int getBurstLoc();
-	bool isFirstResp();
-	Burst getBurst();
+	// bool isFirstResp();
+	// Burst getBurst();
 	void endBurst(int);
 	bool curBurstIo();
-	void setTimes();
+	void setCreateTime(double);
 	int getIoWaitLoc();
 	double getBurstTime();
-	void operator=(Task);
+	double getFirstResponseTime();
 	bool taskIsCompleted();
+	double getLatency();
+	// probably not needed
+	// void operator=(Task);
 	std::vector<Burst> assignBursts();
 };
 

@@ -3,6 +3,7 @@
 Scheduler::Scheduler()
 {
 	numCpus = 4;
+	maxNumCpus = numCpus;
 	cpuVsIo = 50;
 	taskCreateFreq = 5;
 	cntxtSwitchCost = 1;
@@ -13,6 +14,7 @@ Scheduler::Scheduler()
 void Scheduler::setNumCpus(int numToSet)
 {
 	numCpus = numToSet;
+	maxNumCpus = numCpus;
 }
 
 void Scheduler::setPercentCpuIo(double setPercent)
@@ -40,9 +42,11 @@ void Scheduler::init()
 	createTaskBinding();
 	ioDevQueue.createQueues(numOfIoDevs);
 	std::shared_ptr<Task> initTask = std::make_shared<Task>(numOfIoDevs, cpuBinding, ioBinding);
+	initTask->setCreateTime(curTime);
 	std::shared_ptr<Task> endTask = std::make_shared<Task>(numOfIoDevs, cpuBinding, ioBinding);
+	endTask->setCreateTime(curTime);
 	Event firstEvent(initTask, 0, false);
-	Event lastEvent(endTask, 100, false, true);
+	Event lastEvent(endTask, 1000, false, true);
 	eQueue.addEvent(firstEvent);
 	eQueue.addEvent(lastEvent);
 	runSession();
@@ -63,6 +67,7 @@ void Scheduler::createTasks(int numOfTasks)
 	for (int n = 0; n < numOfTasks; n++)
 	{
 		taskToAdd = std::make_shared<Task>(numOfIoDevs, cpuBinding, ioBinding);
+		taskToAdd->setCreateTime(curTime);
 		execTask(taskToAdd);
 	}
 }
@@ -79,7 +84,8 @@ void Scheduler::handleIoEvent(std::shared_ptr<Task> eventTask)
 		Event newEvent(newEventTask, eventTime, true);
 		eQueue.addEvent(newEvent);
 	}
-	else std::cout << "<<<<<<<<<<<<The queue is empty!>>>>>>>>>>>>\n";
+	ioUsage.push_back(ioDevQueue.getIoUtilization());
+	// else std::cout << "<<<<<<<<<<<<The queue is empty!>>>>>>>>>>>>\n";
 }
 
 void Scheduler::handleCpuEvent(std::shared_ptr<Task> eventTask)
@@ -89,9 +95,6 @@ void Scheduler::handleCpuEvent(std::shared_ptr<Task> eventTask)
 	Event eToEx;
 	numCpus++;
 	double newEventTime;
-	// std::cout << "----------------about to fill remaining resources-----------------\n";
-	// if (rQueue.isEmpty()) std::cout << "	rQueue is empty\n";
-	// else std::cout << "	rQueue as items in it\n";
 	while (!rQueue.isEmpty() && numCpus > 0)
 	{
 		std::cout << "Number of cpus avaiable: " << numCpus << std::endl;
@@ -101,9 +104,9 @@ void Scheduler::handleCpuEvent(std::shared_ptr<Task> eventTask)
 		eToEx = Event(toEx, newEventTime, false);
 		eQueue.addEvent(eToEx);
 		numCpus--;
-		// std::cout << "There are now " << numCpus << " CPUs\n";
 	}
-	// std::cout << "Number of cpus avaiable: " << numCpus << std::endl;
+	double cpuUsePercent = 1 - (numCpus / maxNumCpus);
+	cpuUsage.push_back(cpuUsePercent);
 }
 
 void Scheduler::execIO(std::shared_ptr<Task> execTask)
@@ -128,8 +131,6 @@ void Scheduler::execIO(std::shared_ptr<Task> execTask)
 
 void Scheduler::execTask(std::shared_ptr<Task> exTask)
 {
-	// std::cout << "Executing task...\n";
-	// exTask->endBurst(curTime);
 	if (!exTask->taskIsCompleted())
 	{
 		std::cout << "Number of cpus avaiable: " << numCpus << std::endl;
@@ -149,26 +150,24 @@ void Scheduler::execTask(std::shared_ptr<Task> exTask)
 	{
 		std::cout << "The task has finished.\n";
 	}
-	// numCpus--;
 	
 }
 
 void Scheduler::runSession()
 {
-	// std::cout << "Running session...\n";
 	bool endOfSession = false;
 	Event curEvent;
 	std::shared_ptr<Task> curTask;
-	// double lastEventTime = 0;
-	// double timeFromLastE;
 	double lastTaskCreateTime = 0;
+	double lastTimedUnit = 0;
+	double timeDif;
+	uint prevFinishedTasks = 0;
+	uint curFinTaskSize;
 	while (!endOfSession)
 	{
 		std::cout << "\n\n************************************NEW EVENT*******************************\n";
-		// std::cout << "Starting loop again...\n";
 		curEvent = eQueue.pullEvent();
 		curTime = curEvent.getTime();
-		// timeFromLastE = curTime - lastEventTime;
 		if (curEvent.willEndSession())
 		{
 			endOfSession = true;
@@ -177,8 +176,6 @@ void Scheduler::runSession()
 		else
 		{
 			curTask = curEvent.getRelatedTask();
-			// if (curTask->curBurstIo()) std::cout << "This is an IO task\n";
-			// else std::cout << "This is a CPU task\n";
 			if (curEvent.isIo())
 			{
 				std::cout << "This is an IO event\n";
@@ -188,6 +185,13 @@ void Scheduler::runSession()
 			{
 				std::cout << "This is a CPU event\n";
 				handleCpuEvent(curTask);
+			}
+			timeDif = curTime - lastTimedUnit;
+			if (timeDif > 1.0)
+			{
+				lastTimedUnit = curTime;
+				curFinTaskSize = finishedTasks.size();
+				throughputList.push_back(curFinTaskSize - prevFinishedTasks);
 			}
 			std::cout << "Not ending session yet!  Time: " << curEvent.getTime() << "\n";
 			if (!curTask->taskIsCompleted())
@@ -208,34 +212,103 @@ void Scheduler::runSession()
 					execTask(curTask);
 				}
 			}
-			
-			// lastEventTime = curTime;
+			else
+			{
+				finishedTasks.push_back(curTask);
+				std::cout << "Pushed back finished task.\n";
+			}
 		}
-		// std::cout << "How about now?\n";
 	}
 }
 
-void Scheduler::getDats()
+Data Scheduler::getData()
 {
-	// need to fill in
+	// std::cout << "initiating data..\n";
+	Data results;
+	// std::cout << "Calculating latency\n";
+	calcLatency(results);
+	// std::cout << "Calculating response time\n";
+	calcRespTime(results);
+	// std::cout << "Calculating utilization\n";
+	calcPercentUtilized(results);
+	// std::cout << "Calculating throughput\n";
+	calcThroughput(results);
+	return results;
 }
 
-void Scheduler::calcLatency()
+void Scheduler::calcLatency(Data &resultDats)
 {
-	// need to fill in
+	std::vector<double> latencyList;
+	for (auto&& indTask:finishedTasks)
+	{
+		latencyList.push_back(indTask->getLatency());
+	}
+	resultDats.maxLatency = getMaxVal(latencyList);
+	resultDats.minLatency = getMinVal(latencyList);
+	resultDats.avgLatency = getAvgVal(latencyList);
 }
 
-void Scheduler::calcRespTime()
+void Scheduler::calcRespTime(Data &resultDats)
 {
-	// need to fill in
+	std::vector<double> firstResponseL;
+	for (auto&& indTask:finishedTasks)
+	{
+		firstResponseL.push_back(indTask->getFirstResponseTime());
+	}
+	resultDats.maxResponseTime = getMaxVal(firstResponseL);
+	resultDats.minResponseTime = getMinVal(firstResponseL);
+	resultDats.avgResponseTime = getAvgVal(firstResponseL);	
 }
 
-void Scheduler::calcPercentUtilized()
+void Scheduler::calcPercentUtilized(Data &resultDats)
 {
-	// need to fill in
+	resultDats.minCpuUtilization = getMinVal(cpuUsage);
+	resultDats.maxCpuUtilization = getMaxVal(cpuUsage);
+	resultDats.avgCpuUtilization = getAvgVal(cpuUsage);
+	resultDats.minIoUtilization = getMinVal(ioUsage);
+	resultDats.maxIoUtilization = getMaxVal(ioUsage);
+	resultDats.avgIoUtilization = getAvgVal(ioUsage);
 }
 
-void Scheduler::calcThroughput()
+void Scheduler::calcThroughput(Data &resultDats)
 {
-	// need to fill in
+	std::vector<double> resultThroughput;
+	for (auto&& indRes:throughputList)
+	{
+		resultThroughput.push_back(static_cast<double>(indRes));
+	}
+	resultDats.minThroughput = getMinVal(resultThroughput);
+	resultDats.maxThroughput = getMaxVal(resultThroughput);
+	resultDats.avgThroughput = getAvgVal(resultThroughput);
+}
+
+double Scheduler::getMinVal(std::vector<double> valList)
+{
+	std::cout << "Finding minimum value\n";
+	double minVal = 0;
+	for (auto&& value:valList)
+	{
+		if (value < minVal)
+			minVal = value;
+	}
+	return minVal;
+}
+
+double Scheduler::getMaxVal(std::vector<double> valList)
+{
+	std::cout << "Finding maximum value\n";
+	double maxVal = 0;
+	for (auto&& value:valList)
+	{
+		if (value > maxVal)
+			maxVal = value;
+	}
+	return maxVal;
+}
+
+double Scheduler::getAvgVal(std::vector<double> valList)
+{
+	std::cout << "Getting average\n";
+	auto sum = std::accumulate(valList.cbegin(), valList.cend(), 0);
+    return sum / static_cast<double>(valList.size());
 }

@@ -23,9 +23,7 @@ void Processor::startShell()
 	while (!willExit)
 	{
 		std::cout << "[main]:";
-		// getline(std::cin, cmd);
 		std::cin >> cmd;
-		// parsedCmd = parseString(cmd);
 		if (cmd == "help")
 		{
 			showHelpText();
@@ -66,6 +64,8 @@ void Processor::startShell()
 		else if (cmd == "run")
 		{
 			mainScheduler.init();
+			sessionResults = mainScheduler.getData();
+			printResults();
 		}
 		else
 		{
@@ -102,4 +102,30 @@ std::vector<std::string> Processor::parseString(const std::string& toParse)
         }
     }
     return parsedList;
+}
+
+void Processor::printResults()
+{
+	std::cout << "\n\nRESULTS FROM SESSION:\n"
+		<< "\n--Latency--\n"
+		<< "Min latency: " << sessionResults.minLatency << std::endl
+		<< "Max latency: " << sessionResults.maxLatency << std::endl
+		<< "Avg latency: " << sessionResults.avgLatency << std::endl
+		<< "\n--Response Time--\n"
+		<< "Min response time: " << sessionResults.minResponseTime << std::endl
+		<< "Max response time: " << sessionResults.maxResponseTime << std::endl
+		<< "Avg response time: " << sessionResults.avgResponseTime << std::endl
+		<< "\n--CPU Utilization--\n"
+		<< "Min utilization: " << sessionResults.minCpuUtilization << std::endl
+		<< "Max utilization: " << sessionResults.maxCpuUtilization << std::endl
+		<< "Avg utilization: " << sessionResults.avgCpuUtilization << std::endl
+		<< "\n--IO Utilization--\n"
+		<< "Min utilization: " << sessionResults.minIoUtilization << std::endl
+		<< "Max utilization: " << sessionResults.maxIoUtilization << std::endl
+		<< "Avg utilization: " << sessionResults.avgIoUtilization << std::endl
+		<< "\n--Throughput--\n"
+		<< "Min throughput: " << sessionResults.minThroughput << std::endl
+		<< "Max throughput: " << sessionResults.maxThroughput << std::endl
+		<< "Avg throughput: " << sessionResults.avgThroughput << std::endl
+		<< std::endl;
 }

@@ -47,3 +47,18 @@ bool IOQueues::queueIsEmpty(int ioDevLoc)
 {
 	return queueList[ioDevLoc].empty();
 }
+
+double IOQueues::getIoUtilization()
+{
+	double numOfDevs = 0;
+	int numOfUsedDevs = 0;
+	for(auto&& queue:queueList)
+	{
+		if (!queue.empty())
+		{
+			numOfUsedDevs++;
+		}
+		numOfDevs += 1;
+	}
+	return numOfUsedDevs / numOfDevs;
+}

@@ -12,11 +12,13 @@ class Processor
 {
 private:
 	Scheduler mainScheduler;
+	Data sessionResults;
 public:
 	Processor();
 	void startShell();
 	void showHelpText();
 	std::vector<std::string> parseString(const std::string&);
+	void printResults();
 };
 
 #endif

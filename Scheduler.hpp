@@ -8,12 +8,35 @@
 #include "ReadyQueue.hpp"
 #include "IOQueues.hpp"
 
+struct Data
+{
+	double minLatency;
+	double maxLatency;
+	double avgLatency;
+	double minResponseTime;
+	double maxResponseTime;
+	double avgResponseTime;
+	double minCpuUtilization;
+	double maxCpuUtilization;
+	double avgCpuUtilization;
+	double minIoUtilization;
+	double maxIoUtilization;
+	double avgIoUtilization;
+	double minThroughput;
+	double maxThroughput;
+	double avgThroughput;
+};
+
 class Scheduler
 {
 private:
-	std::vector<Task*> finishedTasks;
+	std::vector<std::shared_ptr<Task>> finishedTasks;
+	std::vector<double> ioUsage;
+	std::vector<double> cpuUsage;
 	double curTime;
 	int numCpus;
+	std::vector<uint> throughputList;
+	double maxNumCpus;
 	double cpuVsIo;
 	double cpuBinding;
 	double ioBinding;
@@ -37,12 +60,15 @@ public:
 	void setNumIoDevices(int numDevices);
 	void init();
 	void runSession();
-	void getDats();
-	void calcLatency();
-	void calcRespTime();
-	void calcPercentUtilized();
-	void calcThroughput();
+	Data getData();
+	void calcLatency(Data&);
+	void calcRespTime(Data&);
+	void calcPercentUtilized(Data&);
+	void calcThroughput(Data&);
 	void execTask(std::shared_ptr<Task>);
+	double getMinVal(std::vector<double>);
+	double getMaxVal(std::vector<double>);
+	double getAvgVal(std::vector<double>);
 };
 
 #endif
