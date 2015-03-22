@@ -10,6 +10,7 @@ void IOQueues::createQueues(int numOfQueues)
 	std::vector<std::shared_ptr<Task>> newQueue;
 	for (int n = 0; n < numOfQueues; n++)
 	{
+		std::cout << "IO utilization: Creating queue " << n << " of " << numOfQueues << std::endl;
 		queueList.push_back(newQueue);
 	}
 }
@@ -52,6 +53,7 @@ double IOQueues::getIoUtilization()
 {
 	double numOfDevs = 0;
 	int numOfUsedDevs = 0;
+	std::cout << "IO utilization (the number of devices): " << queueList.size() << std::endl;
 	for(auto&& queue:queueList)
 	{
 		if (!queue.empty())
@@ -60,5 +62,6 @@ double IOQueues::getIoUtilization()
 		}
 		numOfDevs += 1;
 	}
+	std::cout << "IO utilization: " << numOfUsedDevs << " used of " << numOfDevs << " or " << numOfUsedDevs / numOfDevs << std::endl;
 	return numOfUsedDevs / numOfDevs;
 }

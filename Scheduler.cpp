@@ -93,7 +93,9 @@ void Scheduler::handleCpuEvent(std::shared_ptr<Task> eventTask)
 	eventTask->endBurst(curTime);
 	std::shared_ptr<Task> toEx;
 	Event eToEx;
-	numCpus++;
+	std::cout << "There are " << numCpus << " compared to " << maxNumCpus << std::endl;
+	if (numCpus < maxNumCpus)
+		numCpus++;
 	double newEventTime;
 	while (!rQueue.isEmpty() && numCpus > 0)
 	{
@@ -105,6 +107,7 @@ void Scheduler::handleCpuEvent(std::shared_ptr<Task> eventTask)
 		eQueue.addEvent(eToEx);
 		numCpus--;
 	}
+	std::cout << "CPU utilization: " << 1 - (numCpus / maxNumCpus) << std::endl;
 	double cpuUsePercent = 1 - (numCpus / maxNumCpus);
 	cpuUsage.push_back(cpuUsePercent);
 }
@@ -191,7 +194,9 @@ void Scheduler::runSession()
 			{
 				lastTimedUnit = curTime;
 				curFinTaskSize = finishedTasks.size();
+				std::cout << curFinTaskSize << " - " << prevFinishedTasks << " = " << curFinTaskSize - prevFinishedTasks << std::endl;
 				throughputList.push_back(curFinTaskSize - prevFinishedTasks);
+				prevFinishedTasks = curFinTaskSize;
 			}
 			std::cout << "Not ending session yet!  Time: " << curEvent.getTime() << "\n";
 			if (!curTask->taskIsCompleted())
@@ -262,12 +267,12 @@ void Scheduler::calcRespTime(Data &resultDats)
 
 void Scheduler::calcPercentUtilized(Data &resultDats)
 {
-	resultDats.minCpuUtilization = getMinVal(cpuUsage);
-	resultDats.maxCpuUtilization = getMaxVal(cpuUsage);
-	resultDats.avgCpuUtilization = getAvgVal(cpuUsage);
-	resultDats.minIoUtilization = getMinVal(ioUsage);
-	resultDats.maxIoUtilization = getMaxVal(ioUsage);
-	resultDats.avgIoUtilization = getAvgVal(ioUsage);
+	resultDats.minCpuUtilization = getMinVal(cpuUsage) * 100;
+	resultDats.maxCpuUtilization = getMaxVal(cpuUsage) * 100;
+	resultDats.avgCpuUtilization = getAvgVal(cpuUsage) * 100;
+	resultDats.minIoUtilization = getMinVal(ioUsage) * 100;
+	resultDats.maxIoUtilization = getMaxVal(ioUsage) * 100;
+	resultDats.avgIoUtilization = getAvgVal(ioUsage) * 100;
 }
 
 void Scheduler::calcThroughput(Data &resultDats)

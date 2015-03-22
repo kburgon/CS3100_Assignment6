@@ -12,7 +12,7 @@ Task::Task(int ioDevCnt, double cpuMultiplier, double ioMultiplier)
 		if (isIo)
 		{
 			ioTimeSet = ioMultiplier * getRandomFloat();
-			std::cout << "IO BINDING: The multiplier is at " << ioMultiplier << " and the new time is " << ioTimeSet << std::endl;
+			// std::cout << "IO BINDING: The multiplier is at " << ioMultiplier << " and the new time is " << ioTimeSet << std::endl;
 			newIoBurst = IoBurst(ioMultiplier, getRandomInt(ioDevCnt));
 			bursts.push_back(newIoBurst);
 			isIo = false;
@@ -20,7 +20,7 @@ Task::Task(int ioDevCnt, double cpuMultiplier, double ioMultiplier)
 		else
 		{
 			cpuTimeSet = cpuMultiplier * getRandomFloat();
-			std::cout << "CPU BINDING: The multiplier is at " << ioMultiplier << " and the new time is " << cpuTimeSet << std::endl;
+			// std::cout << "CPU BINDING: The multiplier is at " << ioMultiplier << " and the new time is " << cpuTimeSet << std::endl;
 			newBurst = Burst(cpuTimeSet);
 			bursts.push_back(newBurst);
 			isIo = true;
@@ -49,6 +49,7 @@ void Task::endBurst(int endTime)
 	if (curBurstLoc == numOfBursts)
 	{
 		std::cout << "Shutting down task...\n";
+		isCompleted = true;
 		latency = endTime - createTime;
 		curBurstLoc = -1;
 	}
