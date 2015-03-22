@@ -49,7 +49,7 @@ private:
 	void createTaskBinding();
 	void createTasks(int);
 	void execIO(std::shared_ptr<Task>);
-	void handleIoEvent(std::shared_ptr<Task>);
+	void handleIoEvent(Event);
 	void handleCpuEvent(std::shared_ptr<Task>);
 public:
 	Scheduler();

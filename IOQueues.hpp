@@ -11,7 +11,7 @@ class IOQueues
 private:
 	std::vector<std::vector<std::shared_ptr<Task>>> queueList;
 public:
-	IOQueues(int=1);
+	IOQueues(int=0);
 	void createQueues(int);
 	void pushTask(std::shared_ptr<Task>);
 	std::shared_ptr<Task> getNextTask(int);

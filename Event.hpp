@@ -12,6 +12,7 @@ private:
 	std::shared_ptr<Task> relatedTask;
 	bool endSession;
 	bool isIoEvent;
+	int ioWaitLoc;
 public:
 	Event();
 	Event(std::shared_ptr<Task>, double, bool, bool=false);
@@ -22,6 +23,7 @@ public:
 	void operator=(Event);
 	bool operator>(Event) const;
 	bool operator<(Event) const;
+	int getIoWaitLoc();
 	// ~Event();
 };
 

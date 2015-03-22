@@ -72,9 +72,10 @@ void Scheduler::createTasks(int numOfTasks)
 	}
 }
 
-void Scheduler::handleIoEvent(std::shared_ptr<Task> eventTask)
+void Scheduler::handleIoEvent(Event eToHandle)
 {
-	int ioDevLoc = eventTask->getIoWaitLoc();
+	std::shared_ptr<Task> eventTask = eToHandle.getRelatedTask();
+	int ioDevLoc = eToHandle.getIoWaitLoc();
 	ioDevQueue.finishTask(ioDevLoc);
 	eventTask->endBurst(curTime);
 	if (!ioDevQueue.queueIsEmpty(ioDevLoc))
@@ -179,7 +180,7 @@ void Scheduler::runSession()
 			if (curEvent.isIo())
 			{
 				std::cout << "This is an IO event\n";
-				handleIoEvent(curTask);
+				handleIoEvent(curEvent);
 			}
 			else
 			{
