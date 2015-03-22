@@ -65,7 +65,14 @@ void Processor::startShell()
 		{
 			mainScheduler.init();
 			sessionResults = mainScheduler.getData();
-			printResults();
+			printResults(sessionResults);
+			std::cout << "Pausing..\n";
+			std::cin >> cmd;
+			std::shared_ptr<RRQueue> roundRobin = std::make_shared<RRQueue>();
+			Scheduler roundRScheduler(roundRobin);
+			roundRScheduler.init();
+			roundResults = roundRScheduler.getData();
+			printResults(roundResults);
 		}
 		else
 		{
@@ -104,28 +111,28 @@ std::vector<std::string> Processor::parseString(const std::string& toParse)
     return parsedList;
 }
 
-void Processor::printResults()
+void Processor::printResults(Data results)
 {
 	std::cout << "\n\nRESULTS FROM SESSION:\n"
 		<< "\n--Latency--\n"
-		<< "Min latency: " << sessionResults.minLatency << std::endl
-		<< "Max latency: " << sessionResults.maxLatency << std::endl
-		<< "Avg latency: " << sessionResults.avgLatency << std::endl
+		<< "Min latency: " << results.minLatency << std::endl
+		<< "Max latency: " << results.maxLatency << std::endl
+		<< "Avg latency: " << results.avgLatency << std::endl
 		<< "\n--Response Time--\n"
-		<< "Min response time: " << sessionResults.minResponseTime << std::endl
-		<< "Max response time: " << sessionResults.maxResponseTime << std::endl
-		<< "Avg response time: " << sessionResults.avgResponseTime << std::endl
+		<< "Min response time: " << results.minResponseTime << std::endl
+		<< "Max response time: " << results.maxResponseTime << std::endl
+		<< "Avg response time: " << results.avgResponseTime << std::endl
 		<< "\n--CPU Utilization--\n"
-		<< "Min utilization: " << sessionResults.minCpuUtilization << std::endl
-		<< "Max utilization: " << sessionResults.maxCpuUtilization << std::endl
-		<< "Avg utilization: " << sessionResults.avgCpuUtilization << std::endl
+		<< "Min utilization: " << results.minCpuUtilization << std::endl
+		<< "Max utilization: " << results.maxCpuUtilization << std::endl
+		<< "Avg utilization: " << results.avgCpuUtilization << std::endl
 		<< "\n--IO Utilization--\n"
-		<< "Min utilization: " << sessionResults.minIoUtilization << std::endl
-		<< "Max utilization: " << sessionResults.maxIoUtilization << std::endl
-		<< "Avg utilization: " << sessionResults.avgIoUtilization << std::endl
+		<< "Min utilization: " << results.minIoUtilization << std::endl
+		<< "Max utilization: " << results.maxIoUtilization << std::endl
+		<< "Avg utilization: " << results.avgIoUtilization << std::endl
 		<< "\n--Throughput--\n"
-		<< "Min throughput: " << sessionResults.minThroughput << std::endl
-		<< "Max throughput: " << sessionResults.maxThroughput << std::endl
-		<< "Avg throughput: " << sessionResults.avgThroughput << std::endl
+		<< "Min throughput: " << results.minThroughput << std::endl
+		<< "Max throughput: " << results.maxThroughput << std::endl
+		<< "Avg throughput: " << results.avgThroughput << std::endl
 		<< std::endl;
 }

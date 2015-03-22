@@ -2,6 +2,19 @@
 
 Scheduler::Scheduler()
 {
+	rQueue = std::make_shared<ReadyQueue>();
+	numCpus = 4;
+	maxNumCpus = numCpus;
+	cpuVsIo = 50;
+	taskCreateFreq = 5;
+	cntxtSwitchCost = 1;
+	numOfIoDevs = 3;
+	curTime = 0;
+}
+
+Scheduler::Scheduler(std::shared_ptr<ReadyQueue> setReady)
+{
+	rQueue = setReady;
 	numCpus = 4;
 	maxNumCpus = numCpus;
 	cpuVsIo = 50;
@@ -72,11 +85,13 @@ void Scheduler::createTasks(int numOfTasks)
 	}
 }
 
-void Scheduler::handleIoEvent(Event eToHandle)
+void Scheduler::handleIoEvent(std::shared_ptr<Task> eventTask)
 {
-	std::shared_ptr<Task> eventTask = eToHandle.getRelatedTask();
-	int ioDevLoc = eToHandle.getIoWaitLoc();
+	std::cout << "-\n";
+	int ioDevLoc = eventTask->getIoWaitLoc();
+	std::cout << "--\n";
 	ioDevQueue.finishTask(ioDevLoc);
+	std::cout << "---\n";
 	eventTask->endBurst(curTime);
 	if (!ioDevQueue.queueIsEmpty(ioDevLoc))
 	{
@@ -94,13 +109,14 @@ void Scheduler::handleCpuEvent(std::shared_ptr<Task> eventTask)
 	eventTask->endBurst(curTime);
 	std::shared_ptr<Task> toEx;
 	Event eToEx;
-	numCpus++;
+	if (numCpus < maxNumCpus)
+		numCpus++;
 	double newEventTime;
-	while (!rQueue.isEmpty() && numCpus > 0)
+	while (!rQueue->isEmpty() && numCpus > 0)
 	{
 		std::cout << "Number of cpus avaiable: " << numCpus << std::endl;
 		std::cout << "\n\nFilling cpus...\n\n";
-		toEx = rQueue.pullTask();
+		toEx = rQueue->pullTask();
 		newEventTime = curTime + cntxtSwitchCost + eventTask->getBurstTime();
 		eToEx = Event(toEx, newEventTime, false);
 		eQueue.addEvent(eToEx);
@@ -135,11 +151,11 @@ void Scheduler::execTask(std::shared_ptr<Task> exTask)
 	if (!exTask->taskIsCompleted())
 	{
 		std::cout << "Number of cpus avaiable: " << numCpus << std::endl;
-		rQueue.pushTask(exTask);
+		rQueue->pushTask(exTask);
 		if (numCpus > 0)
 		{
 			std::cout << "There are " << numCpus << " cpus left. Filling...\n";
-			std::shared_ptr<Task> toExec = rQueue.pullTask();
+			std::shared_ptr<Task> toExec = rQueue->pullTask();
 			double timeToEvent = cntxtSwitchCost + toExec->getBurstTime();
 			double nextEventTime = curTime + timeToEvent;
 			Event nextEvent(exTask, nextEventTime, false);
@@ -180,7 +196,7 @@ void Scheduler::runSession()
 			if (curEvent.isIo())
 			{
 				std::cout << "This is an IO event\n";
-				handleIoEvent(curEvent);
+				handleIoEvent(curTask);
 			}
 			else
 			{

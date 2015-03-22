@@ -30,6 +30,8 @@ Task::Task(int ioDevCnt, double cpuMultiplier, double ioMultiplier)
 	curBurstLoc = 0;
 	firstResponse = true;
 	isCompleted = false;
+	burstInterrupted = false;
+	interruptTimeRemaining = -1;
 }
 
 void Task::setCreateTime(double timeSet)
@@ -44,14 +46,17 @@ void Task::endBurst(int endTime)
 		firstResponse = false;
 		firstResponseTime = endTime - createTime;
 	}
-	bursts[curBurstLoc].endBurst(endTime);
-	curBurstLoc++;
+	if (!isInterrupted())
+	{	
+		bursts[curBurstLoc].endBurst(endTime);
+		curBurstLoc++;
+	}
 	if (curBurstLoc == numOfBursts)
 	{
 		std::cout << "Shutting down task...\n";
-		latency = endTime - createTime;
 		curBurstLoc = -1;
 	}
+	latency = endTime - createTime;
 }
 
 bool Task::curBurstIo()
@@ -75,7 +80,15 @@ int Task::getBurstLoc()
 
 double Task::getBurstTime()
 {
-	return bursts[curBurstLoc].getBurstTime();
+	if (isInterrupted())
+	{
+		return interruptRunTime;
+	}
+	else if (interruptTimeRemaining == -1)
+	{
+		return bursts[curBurstLoc].getBurstTime();	
+	}
+	return interruptTimeRemaining;
 }
 
 std::vector<Burst> Task::assignBursts()
@@ -114,4 +127,29 @@ double Task::getLatency()
 double Task::getFirstResponseTime()
 {
 	return firstResponseTime;
+}
+
+bool Task::isInterrupted()
+{
+	return burstInterrupted;
+}
+
+void Task::setInterrupted(bool setIsInterrupted)
+{
+	burstInterrupted = setIsInterrupted;
+}
+
+void Task::setInterruptRunTime(double setTime)
+{
+	interruptRunTime = setTime;
+}
+
+void Task::setRemainingInterruptTime(double setTime)
+{
+	interruptTimeRemaining = setTime;
+}
+
+double Task::getRemainingInterruptTime()
+{
+	return interruptTimeRemaining;
 }

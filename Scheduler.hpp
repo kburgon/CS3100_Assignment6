@@ -44,15 +44,16 @@ private:
 	double cntxtSwitchCost;
 	int numOfIoDevs;
 	EventQueue eQueue;
-	ReadyQueue rQueue;
+	std::shared_ptr<ReadyQueue> rQueue;
 	IOQueues ioDevQueue;
 	void createTaskBinding();
 	void createTasks(int);
 	void execIO(std::shared_ptr<Task>);
-	void handleIoEvent(Event);
+	void handleIoEvent(std::shared_ptr<Task>);
 	void handleCpuEvent(std::shared_ptr<Task>);
 public:
 	Scheduler();
+	Scheduler(std::shared_ptr<ReadyQueue>);
 	void setNumCpus(int numToSet);
 	void setPercentCpuIo(double setPercent);
 	void setTaskCreateFreq(double setFreq);

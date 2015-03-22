@@ -42,10 +42,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/kevin/Documents/CS3100/CS3100_Assignment6
+CMAKE_SOURCE_DIR = /home/kevin/Documents/CS3100/Assignment7/CS3100_Assignment6
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/kevin/Documents/CS3100/CS3100_Assignment6
+CMAKE_BINARY_DIR = /home/kevin/Documents/CS3100/Assignment7/CS3100_Assignment6
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -72,9 +72,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/kevin/Documents/CS3100/CS3100_Assignment6/CMakeFiles /home/kevin/Documents/CS3100/CS3100_Assignment6/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/kevin/Documents/CS3100/Assignment7/CS3100_Assignment6/CMakeFiles /home/kevin/Documents/CS3100/Assignment7/CS3100_Assignment6/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/kevin/Documents/CS3100/CS3100_Assignment6/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/kevin/Documents/CS3100/Assignment7/CS3100_Assignment6/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -234,6 +234,30 @@ Processor.cpp.s:
 	$(MAKE) -f CMakeFiles/SchedulerSimulator.dir/build.make CMakeFiles/SchedulerSimulator.dir/Processor.cpp.s
 .PHONY : Processor.cpp.s
 
+RRQueue.o: RRQueue.cpp.o
+.PHONY : RRQueue.o
+
+# target to build an object file
+RRQueue.cpp.o:
+	$(MAKE) -f CMakeFiles/SchedulerSimulator.dir/build.make CMakeFiles/SchedulerSimulator.dir/RRQueue.cpp.o
+.PHONY : RRQueue.cpp.o
+
+RRQueue.i: RRQueue.cpp.i
+.PHONY : RRQueue.i
+
+# target to preprocess a source file
+RRQueue.cpp.i:
+	$(MAKE) -f CMakeFiles/SchedulerSimulator.dir/build.make CMakeFiles/SchedulerSimulator.dir/RRQueue.cpp.i
+.PHONY : RRQueue.cpp.i
+
+RRQueue.s: RRQueue.cpp.s
+.PHONY : RRQueue.s
+
+# target to generate assembly for a file
+RRQueue.cpp.s:
+	$(MAKE) -f CMakeFiles/SchedulerSimulator.dir/build.make CMakeFiles/SchedulerSimulator.dir/RRQueue.cpp.s
+.PHONY : RRQueue.cpp.s
+
 ReadyQueue.o: ReadyQueue.cpp.o
 .PHONY : ReadyQueue.o
 
@@ -354,6 +378,9 @@ help:
 	@echo "... Processor.o"
 	@echo "... Processor.i"
 	@echo "... Processor.s"
+	@echo "... RRQueue.o"
+	@echo "... RRQueue.i"
+	@echo "... RRQueue.s"
 	@echo "... ReadyQueue.o"
 	@echo "... ReadyQueue.i"
 	@echo "... ReadyQueue.s"

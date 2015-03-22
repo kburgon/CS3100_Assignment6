@@ -14,6 +14,8 @@ set(Sources
 	Task.cpp
 	Burst.hpp
 	Burst.cpp
+	RRQueue.hpp
+	RRQueue.cpp
 	ReadyQueue.hpp
 	ReadyQueue.cpp
 	IOQueues.hpp

@@ -8,14 +8,14 @@
 
 class ReadyQueue
 {
-private:
-	std::vector<std::shared_ptr<Task>> readyList;
 public:
-	ReadyQueue();
 	virtual void pushTask(std::shared_ptr<Task> curTask);
 	virtual std::shared_ptr<Task> pullTask();
-	bool isEmpty();
+	ReadyQueue();
+	virtual bool isEmpty();
 	void printQueue();
+private:	
+	std::vector<std::shared_ptr<Task>> readyList;
 };
 
 #endif

@@ -8,10 +8,11 @@
 class Task
 {
 private:
+	double interruptRunTime;
+	double interruptTimeRemaining;
+	bool burstInterrupted;
 	bool isIo;
-	// int randomInt;
 	std::vector<Burst> bursts;
-	// Burst burst;
 	double createTime;
 	double latency;
 	int curBurstLoc;
@@ -24,8 +25,6 @@ private:
 public:
 	Task(int, double, double);
 	int getBurstLoc();
-	// bool isFirstResp();
-	// Burst getBurst();
 	void endBurst(int);
 	bool curBurstIo();
 	void setCreateTime(double);
@@ -34,9 +33,12 @@ public:
 	double getFirstResponseTime();
 	bool taskIsCompleted();
 	double getLatency();
-	// probably not needed
-	// void operator=(Task);
+	bool isInterrupted();
+	void setInterrupted(bool);
+	void setInterruptRunTime(double);
 	std::vector<Burst> assignBursts();
+	void setRemainingInterruptTime(double);
+	double getRemainingInterruptTime();
 };
 
 #endif
