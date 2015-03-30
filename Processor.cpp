@@ -18,6 +18,7 @@ void Processor::startShell()
 	std::string cmd;
 	std::vector<std::string> parsedCmd;
 	double setFloat;
+	setInterruptTime = 10;
 	int setInt;
 	bool willExit = false;
 	while (!willExit)
@@ -59,6 +60,8 @@ void Processor::startShell()
 			std::cout << "Setting creation frequency to " << setFloat << std::endl;
 			mainScheduler.setTaskCreateFreq(setFloat);
 			// run setter for task create frequency
+			std::cout << "Round robin interrupt time: ";
+			std::cin >> setInterruptTime;
 			std::cout << "Variables set.\n";
 		}
 		else if (cmd == "run")
@@ -68,11 +71,18 @@ void Processor::startShell()
 			printResults(sessionResults);
 			std::cout << "Pausing..\n";
 			std::cin >> cmd;
-			std::shared_ptr<RRQueue> roundRobin = std::make_shared<RRQueue>();
+			std::shared_ptr<RRQueue> roundRobin = std::make_shared<RRQueue>(setInterruptTime);
 			Scheduler roundRScheduler(roundRobin);
 			roundRScheduler.init();
 			roundResults = roundRScheduler.getData();
 			printResults(roundResults);
+			std::cout << "Pausing..\n";
+			std::cin >> cmd;
+			std::shared_ptr<ASJQueue> asjQ = std::make_shared<ASJQueue>();
+			Scheduler ASJScheduler(asjQ);
+			ASJScheduler.init();
+			asjResults = ASJScheduler.getData();
+			printResults(asjResults);
 		}
 		else
 		{

@@ -45,16 +45,22 @@ void Task::endBurst(int endTime)
 	{
 		firstResponse = false;
 		firstResponseTime = endTime - createTime;
+		bursts[curBurstLoc].endBurst(endTime);
+		curBurstLoc++;
+		std::cout << "Advancing to next burst\n";
 	}
-	if (!isInterrupted())
+	else if (!isInterrupted() || bursts[curBurstLoc].isIo())
 	{	
 		bursts[curBurstLoc].endBurst(endTime);
 		curBurstLoc++;
+		std::cout << "Advancing to next burst\n";
 	}
+	else std::cout << "Not advancing to next burst\n";
 	if (curBurstLoc == numOfBursts)
 	{
 		std::cout << "Shutting down task...\n";
 		curBurstLoc = -1;
+		isCompleted = true;
 	}
 	latency = endTime - createTime;
 }
@@ -152,4 +158,20 @@ void Task::setRemainingInterruptTime(double setTime)
 double Task::getRemainingInterruptTime()
 {
 	return interruptTimeRemaining;
+}
+
+bool Task::operator>(Task toCompare) const
+{
+	// double taskTime = bursts[curBurstLoc].getBurstTime();
+	if (bursts[curBurstLoc].getBurstTime() > toCompare.getBurstTime())
+		return true;
+	return false;
+}
+
+bool Task::operator<(Task toCompare) const
+{
+	// double taskTime = bursts[curBurstLoc].getBurstTime();
+	if (bursts[curBurstLoc].getBurstTime() < toCompare.getBurstTime())
+		return true;
+	return false;
 }

@@ -112,6 +112,7 @@ void Scheduler::handleCpuEvent(std::shared_ptr<Task> eventTask)
 	if (numCpus < maxNumCpus)
 		numCpus++;
 	double newEventTime;
+	std::cout << "Does it fail here?\n";
 	while (!rQueue->isEmpty() && numCpus > 0)
 	{
 		std::cout << "Number of cpus avaiable: " << numCpus << std::endl;
@@ -193,7 +194,9 @@ void Scheduler::runSession()
 		else
 		{
 			curTask = curEvent.getRelatedTask();
-			if (curEvent.isIo())
+			if (curTask->curBurstIo()) std::cout << "This is an IO task\n";
+			else std::cout << "This is a CPU task\n";
+			if (curEvent.isIo() && curTask->getIoWaitLoc() > -1)
 			{
 				std::cout << "This is an IO event\n";
 				handleIoEvent(curTask);

@@ -55,7 +55,7 @@ double Burst::getEndTime()
 	return endTime;
 }
 
-double Burst::getBurstTime()
+double Burst::getBurstTime() const
 {
 	return bTime;
 }

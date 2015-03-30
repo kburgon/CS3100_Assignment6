@@ -9,6 +9,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/SchedulerSimulator.dir/RRQueue.cpp.o"
   "CMakeFiles/SchedulerSimulator.dir/ReadyQueue.cpp.o"
   "CMakeFiles/SchedulerSimulator.dir/IOQueues.cpp.o"
+  "CMakeFiles/SchedulerSimulator.dir/SJQueue.cpp.o"
+  "CMakeFiles/SchedulerSimulator.dir/ASJQueue.cpp.o"
   "SchedulerSimulator.pdb"
   "SchedulerSimulator"
 )

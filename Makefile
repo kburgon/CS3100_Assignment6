@@ -114,6 +114,30 @@ SchedulerSimulator/fast:
 	$(MAKE) -f CMakeFiles/SchedulerSimulator.dir/build.make CMakeFiles/SchedulerSimulator.dir/build
 .PHONY : SchedulerSimulator/fast
 
+ASJQueue.o: ASJQueue.cpp.o
+.PHONY : ASJQueue.o
+
+# target to build an object file
+ASJQueue.cpp.o:
+	$(MAKE) -f CMakeFiles/SchedulerSimulator.dir/build.make CMakeFiles/SchedulerSimulator.dir/ASJQueue.cpp.o
+.PHONY : ASJQueue.cpp.o
+
+ASJQueue.i: ASJQueue.cpp.i
+.PHONY : ASJQueue.i
+
+# target to preprocess a source file
+ASJQueue.cpp.i:
+	$(MAKE) -f CMakeFiles/SchedulerSimulator.dir/build.make CMakeFiles/SchedulerSimulator.dir/ASJQueue.cpp.i
+.PHONY : ASJQueue.cpp.i
+
+ASJQueue.s: ASJQueue.cpp.s
+.PHONY : ASJQueue.s
+
+# target to generate assembly for a file
+ASJQueue.cpp.s:
+	$(MAKE) -f CMakeFiles/SchedulerSimulator.dir/build.make CMakeFiles/SchedulerSimulator.dir/ASJQueue.cpp.s
+.PHONY : ASJQueue.cpp.s
+
 Burst.o: Burst.cpp.o
 .PHONY : Burst.o
 
@@ -282,6 +306,30 @@ ReadyQueue.cpp.s:
 	$(MAKE) -f CMakeFiles/SchedulerSimulator.dir/build.make CMakeFiles/SchedulerSimulator.dir/ReadyQueue.cpp.s
 .PHONY : ReadyQueue.cpp.s
 
+SJQueue.o: SJQueue.cpp.o
+.PHONY : SJQueue.o
+
+# target to build an object file
+SJQueue.cpp.o:
+	$(MAKE) -f CMakeFiles/SchedulerSimulator.dir/build.make CMakeFiles/SchedulerSimulator.dir/SJQueue.cpp.o
+.PHONY : SJQueue.cpp.o
+
+SJQueue.i: SJQueue.cpp.i
+.PHONY : SJQueue.i
+
+# target to preprocess a source file
+SJQueue.cpp.i:
+	$(MAKE) -f CMakeFiles/SchedulerSimulator.dir/build.make CMakeFiles/SchedulerSimulator.dir/SJQueue.cpp.i
+.PHONY : SJQueue.cpp.i
+
+SJQueue.s: SJQueue.cpp.s
+.PHONY : SJQueue.s
+
+# target to generate assembly for a file
+SJQueue.cpp.s:
+	$(MAKE) -f CMakeFiles/SchedulerSimulator.dir/build.make CMakeFiles/SchedulerSimulator.dir/SJQueue.cpp.s
+.PHONY : SJQueue.cpp.s
+
 Scheduler.o: Scheduler.cpp.o
 .PHONY : Scheduler.o
 
@@ -363,6 +411,9 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... SchedulerSimulator"
+	@echo "... ASJQueue.o"
+	@echo "... ASJQueue.i"
+	@echo "... ASJQueue.s"
 	@echo "... Burst.o"
 	@echo "... Burst.i"
 	@echo "... Burst.s"
@@ -384,6 +435,9 @@ help:
 	@echo "... ReadyQueue.o"
 	@echo "... ReadyQueue.i"
 	@echo "... ReadyQueue.s"
+	@echo "... SJQueue.o"
+	@echo "... SJQueue.i"
+	@echo "... SJQueue.s"
 	@echo "... Scheduler.o"
 	@echo "... Scheduler.i"
 	@echo "... Scheduler.s"

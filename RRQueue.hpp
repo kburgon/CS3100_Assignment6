@@ -23,6 +23,7 @@ public:
 private:
 	std::vector<std::shared_ptr<Task>> readyList;
 	double allowedTime;
+	double setInterruptTime;
 };
 
 #endif

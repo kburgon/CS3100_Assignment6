@@ -40,6 +40,7 @@ std::shared_ptr<Task> IOQueues::getNextTask(int burstIoLoc)
 
 void IOQueues::finishTask(int burstIoLoc)
 {
+	std::cout << "The IO device is " << burstIoLoc << std::endl;
 	queueList[burstIoLoc].erase(queueList[burstIoLoc].begin());
 }
 

@@ -20,6 +20,10 @@ set(Sources
 	ReadyQueue.cpp
 	IOQueues.hpp
 	IOQueues.cpp
+	SJQueue.hpp
+	SJQueue.cpp
+	ASJQueue.hpp
+	ASJQueue.cpp
 )
 
 set(CMAKE_CXX_FLAGS --std=c++11)

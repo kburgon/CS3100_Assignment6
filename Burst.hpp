@@ -20,7 +20,7 @@ public:
 	bool isIo();
 	double getLatency();
 	double getEndTime();
-	double getBurstTime();
+	double getBurstTime() const;
 	void endBurst(int);
 	void setDevLoc(int);
 	void operator=(Burst);

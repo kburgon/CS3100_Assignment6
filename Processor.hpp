@@ -3,6 +3,7 @@
 
 #include "Scheduler.hpp"
 #include "RRQueue.hpp"
+#include "ASJQueue.hpp"
 #include <iostream>
 #include <algorithm>
 #include <vector>
@@ -16,6 +17,7 @@ private:
 	Scheduler mainScheduler;
 	Data sessionResults;
 	Data roundResults;
+	Data asjResults;
 public:
 	Processor();
 	void startShell();
